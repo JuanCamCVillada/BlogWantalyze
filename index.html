@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wantalyze · Lab Notes</title>
+<meta name="description" content="Lab Notes de Wantalyze: la Serie Biblioteca Vintage, una entrada al día.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F9FEFD;--ink:#111827;--blue:#00569E;--spark:#00B5F8;--sky:#E0F1FF}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+  .wrap{max-width:1280px;margin:0 auto;padding:56px 24px 80px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+  header{border-bottom:2px solid var(--ink);padding-bottom:28px;margin-bottom:56px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  h1{font-weight:900;font-size:clamp(44px,8vw,96px);letter-spacing:-.045em;line-height:.92;margin-top:14px}
+  h1 em{font-style:normal;color:var(--blue)}
+  .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--spark);margin-right:10px;vertical-align:middle}
+  .count{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--ink)}
+  .shelf{position:relative;padding:0 8px 22px}
+  .row{display:flex;gap:28px;overflow-x:auto;padding:36px 8px 0;scroll-snap-type:x mandatory;scrollbar-width:thin}
+  .shelf::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;background:var(--ink);border-top:6px solid var(--blue)}
+  .book{flex:0 0 auto;width:min(300px,62vw);scroll-snap-align:start;text-decoration:none;color:inherit;display:block}
+  .cover{display:block;width:100%;aspect-ratio:600/900;object-fit:cover;background:var(--sky);border:1px solid var(--ink);box-shadow:0 2px 0 var(--ink);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+  .book:hover .cover,.book:focus-visible .cover{transform:translateY(-22px) rotate(-1.2deg);box-shadow:0 26px 34px -18px rgba(0,86,158,.55),0 2px 0 var(--ink)}
+  .book:focus-visible{outline:none}
+  .book:focus-visible .cover{outline:3px solid var(--spark);outline-offset:4px}
+  .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 2px 14px}
+  .num{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--blue)}
+  .t{font-weight:600;font-size:15px;line-height:1.25;margin-top:4px}
+  .arrow{flex:0 0 auto;width:32px;height:32px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:background .2s,border-color .2s}
+  .arrow svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2}
+  .book:hover .arrow{background:var(--spark);border-color:var(--spark)}
+  .empty{font-family:"JetBrains Mono",monospace;color:var(--blue);padding:40px 0}
+  footer{margin-top:56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  @media (max-width:600px){.wrap{padding:36px 16px 56px}.row{gap:18px}}
+  @media (prefers-reduced-motion:reduce){.cover{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <p class="tag"><span class="dot"></span>Serie Biblioteca Vintage</p>
+      <h1>Wantalyze<br><em>Lab Notes</em></h1>
+    </div>
+    <p class="count" id="count"></p>
+  </header>
+  <section class="shelf" aria-label="Librero de entradas">
+    <div class="row" id="row"></div>
+  </section>
+  <footer>
+    <p class="tag">Want it. Analyze it. Build it.</p>
+    <p class="tag">Una pausa para leer y aprender</p>
+  </footer>
+</div>
+<script>
+  const row = document.getElementById('row');
+  const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  fetch('posts.json', {cache: 'no-store'})
+    .then(r => r.json())
+    .then(posts => {
+      document.getElementById('count').textContent = posts.length + (posts.length === 1 ? ' entrada' : ' entradas');
+      if (!posts.length) { row.innerHTML = '<p class="empty">Aún no hay entradas.</p>'; return; }
+      row.innerHTML = posts.map(p => `
+        <a class="book" href="${esc(p.ruta)}">
+          <img class="cover" src="${esc(p.miniatura)}" alt="Portada de ${esc(p.titulo)}" width="600" height="900" loading="lazy">
+          <span class="meta">
+            <span><span class="num">BV-${esc(p.numero)} / ${esc(p.fecha)}</span><span class="t" style="display:block">${esc(p.titulo)}</span></span>
+            <span class="arrow">${arrow}</span>
+          </span>
+        </a>`).join('');
+    })
+    .catch(() => { row.innerHTML = '<p class="empty">No se pudo cargar posts.json.</p>'; });
+</script>
+</body>
+</html>

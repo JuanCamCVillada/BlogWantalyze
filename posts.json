@@ -1,0 +1,66 @@
+[
+  {
+    "numero": "008",
+    "titulo": "La máquina que escribe casas",
+    "slug": "la-maquina-que-escribe-casas",
+    "ruta": "posts/008-la-maquina-que-escribe-casas/",
+    "miniatura": "posts/008-la-maquina-que-escribe-casas/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "007",
+    "titulo": "El arca de los papelitos",
+    "slug": "el-arca-de-los-papelitos",
+    "ruta": "posts/007-el-arca-de-los-papelitos/",
+    "miniatura": "posts/007-el-arca-de-los-papelitos/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "006",
+    "titulo": "Un consejo de demonios",
+    "slug": "un-consejo-de-demonios",
+    "ruta": "posts/006-un-consejo-de-demonios/",
+    "miniatura": "posts/006-un-consejo-de-demonios/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "005",
+    "titulo": "Una reunión con forma de icosaedro",
+    "slug": "una-reunion-con-forma-de-icosaedro",
+    "ruta": "posts/005-una-reunion-con-forma-de-icosaedro/",
+    "miniatura": "posts/005-una-reunion-con-forma-de-icosaedro/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "004",
+    "titulo": "La caja que componía por sílabas",
+    "slug": "la-caja-que-componia-por-silabas",
+    "ruta": "posts/004-la-caja-que-componia-por-silabas/",
+    "miniatura": "posts/004-la-caja-que-componia-por-silabas/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "003",
+    "titulo": "El buscador de fichas",
+    "slug": "el-buscador-de-fichas",
+    "ruta": "posts/003-el-buscador-de-fichas/",
+    "miniatura": "posts/003-el-buscador-de-fichas/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "002",
+    "titulo": "El piano que pensaba tachando",
+    "slug": "el-piano-que-pensaba-tachando",
+    "ruta": "posts/002-el-piano-que-pensaba-tachando/",
+    "miniatura": "posts/002-el-piano-que-pensaba-tachando/miniatura.png",
+    "fecha": "2026-11-16"
+  },
+  {
+    "numero": "001",
+    "titulo": "La máquina que se aburría",
+    "slug": "la-maquina-que-se-aburria",
+    "ruta": "posts/001-la-maquina-que-se-aburria/",
+    "miniatura": "posts/001-la-maquina-que-se-aburria/miniatura.png",
+    "fecha": "2026-11-16"
+  }
+]

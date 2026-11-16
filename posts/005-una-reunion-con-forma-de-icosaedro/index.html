@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una reunión con forma de icosaedro · Wantalyze</title>
+<meta property="og:image" content="miniatura.png">
+<meta property="og:title" content="Una reunión con forma de icosaedro · Wantalyze">
+<meta name="description" content="En 1994 Stafford Beer propuso organizar una conferencia de 30 personas según la geometría de un icosaedro. Su idea sigue siendo una lección sobre cómo la forma de una red decide la calidad de una conversación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Silkscreen&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --w-paper:#F9FEFD;--w-base:#F9FAFB;--w-line:#E5E7EB;--w-ink:#111827;--w-deep:#00569E;
+  --w-signal:#00B5F8;--w-sky:#47C5FB;--w-glow:#62CFFE;--w-mist:#E0F1FF;
+  --w-grid-major:rgba(0,86,158,.10);--w-grid-minor:rgba(0,86,158,.05);
+  --w-font-sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,sans-serif;
+  --w-font-mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,monospace;
+  --w-font-serif:"New York",ui-serif,"Instrument Serif",Georgia,serif;
+  --w-font-pixel:"Silkscreen","VT323",monospace;
+  --w-font-jp:"Hiragino Sans","Noto Sans JP",sans-serif;
+  --w-ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--w-paper);color:var(--w-ink);font-family:var(--w-font-sans);-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.6}
+a{color:var(--w-deep);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--w-signal)}
+.label{font:500 11px/1.3 var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+.mono{font-family:var(--w-font-mono)}
+em.serif{font-family:var(--w-font-serif);font-style:italic;font-weight:400}
+/* NAV */
+.nav{position:sticky;top:0;z-index:10;background:var(--w-paper);border-bottom:1px solid var(--w-ink);display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 24px}
+.nav .brand{font:500 11px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+.nav .status{font:500 11px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);display:flex;gap:16px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--w-signal);margin-right:6px;vertical-align:1px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative}
+/* HERO */
+.hero{background:linear-gradient(var(--w-paper),var(--w-mist));border-bottom:1px solid var(--w-line);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;padding-top:64px;padding-bottom:64px;align-items:center}
+.hero h1{font-weight:900;font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-.035em;margin:16px 0 24px}
+.hero h1 em{font-size:1.05em;color:var(--w-deep)}
+.ficha{border-top:1.5px solid var(--w-ink);padding-top:12px;display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font:13px/1.45 var(--w-font-mono)}
+.ficha dt{color:var(--w-deep);text-transform:uppercase;letter-spacing:.1em;font-size:11px;padding-top:2px}
+.ficha dd{margin:0}
+.vertical{position:absolute;right:10px;top:84px;writing-mode:vertical-rl;font:500 11px var(--w-font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--w-deep)}
+.vertical .jp{font-family:var(--w-font-jp);letter-spacing:.3em}
+.plate{position:relative;background-color:var(--w-paper);border:1.5px solid var(--w-ink);
+  background-image:linear-gradient(var(--w-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-major) 1px,transparent 1px),linear-gradient(var(--w-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-minor) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px,8px 8px,8px 8px;box-shadow:6px 6px 0 var(--w-deep)}
+.plate svg{display:block;width:100%;height:auto}
+.crop::before,.crop::after{content:"";position:absolute;width:18px;height:18px;border:0 solid var(--w-ink)}
+.crop::before{top:-10px;left:-10px;border-width:1px 0 0 1px}
+.crop::after{bottom:-10px;right:-10px;border-width:0 1px 1px 0}
+.plate-cap{display:flex;justify-content:space-between;margin-top:14px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+/* SECTIONS */
+section.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+.s-head{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.s-head h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0;font-weight:700}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.margin-note{font:500 11px/1.6 var(--w-font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--w-deep);border-left:1.5px solid var(--w-deep);padding-left:12px;align-self:start}
+.prose{max-width:68ch}
+.prose p{margin:0 0 1.1em}
+.drop::first-letter{font-family:var(--w-font-serif);font-size:3.6em;float:left;line-height:.85;padding:6px 10px 0 0;color:var(--w-deep)}
+.core{background:var(--w-mist);border:1.5px solid var(--w-ink);padding:36px 40px;position:relative}
+.core p{font-size:clamp(20px,2.6vw,27px);line-height:1.35;margin:0;letter-spacing:-.01em;max-width:34ch}
+.core .label{position:absolute;top:-10px;left:24px;background:var(--w-paper);padding:0 8px}
+/* windows */
+.win{background:var(--w-paper);border:2px solid var(--w-ink);border-radius:2px;box-shadow:6px 6px 0 var(--w-deep)}
+.win-bar{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-bottom:2px solid var(--w-ink)}
+.win-title{font:12px/1 var(--w-font-pixel);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.win-hatch{flex:1;height:12px;background:repeating-linear-gradient(to bottom,var(--w-ink) 0 2px,transparent 2px 4px)}
+.win-x{width:20px;height:20px;border:2px solid var(--w-ink);display:grid;place-items:center;font:13px/1 var(--w-font-mono)}
+.win-body{padding:20px}
+.win.inv .win-body{background:var(--w-ink);color:var(--w-paper)}
+.win.inv .win-body .label{color:var(--w-glow)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.duo h3,.flow h3{margin:8px 0 8px;font-size:22px;letter-spacing:-.01em}
+.duo p,.flow p{margin:0;font-size:16px}
+.log{font:14px/1.7 var(--w-font-mono)}
+.log .ok{color:var(--w-deep)}
+.log b{font-weight:500}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--w-ink)}
+.flow > div{padding:28px 24px;position:relative}
+.flow > div + div{border-left:1.5px solid var(--w-ink)}
+.flow .num{font:900 64px/1 var(--w-font-sans);letter-spacing:-.04em;color:var(--w-mist);-webkit-text-stroke:1.5px var(--w-deep)}
+.flow .icon{position:absolute;top:28px;right:24px}
+.flow .build{background:var(--w-base)}
+.chip{display:inline-block;border:1px solid var(--w-ink);border-radius:999px;padding:2px 10px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;margin-top:14px}
+/* mesh + shelf */
+.mesh-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.shelf{list-style:none;padding:0;margin:0}
+.shelf li{border-top:1px solid var(--w-line);padding:16px 0;display:grid;grid-template-columns:48px 1fr;gap:12px}
+.shelf li:last-child{border-bottom:1px solid var(--w-line)}
+.shelf .n{font:500 12px var(--w-font-mono);color:var(--w-deep)}
+.shelf b{font-weight:600}
+.sources{font:13px/1.8 var(--w-font-mono);columns:2;column-gap:40px;padding-left:18px;margin:0}
+/* footer */
+footer{background:var(--w-ink);color:var(--w-paper);padding:56px 0 40px}
+footer .motto{font:500 13px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+footer .motto b{color:var(--w-signal);font-weight:500}
+footer .meta{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;margin-top:32px;font:500 11px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-glow)}
+.seg{display:flex;gap:3px;margin-top:20px}
+.seg i{width:14px;height:8px;border:1px solid var(--w-glow)}
+.seg i.on{background:var(--w-glow)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50}
+@keyframes orbit{to{transform:rotate(360deg)}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+@media (max-width:820px){
+  .hero .wrap,.duo,.mesh-grid,.cols{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow > div + div{border-left:0;border-top:1.5px solid var(--w-ink)}
+  .vertical{display:none}
+  .nav .status span.hide{display:none}
+  .sources{columns:1}
+  .core{padding:28px 22px}
+}
+
+.dek{font-size:20px;line-height:1.45;max-width:34ch;margin:0 0 20px;color:var(--w-ink)}
+.byline{font:500 12px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);border-top:1.5px solid var(--w-ink);padding-top:12px;margin:0}
+.article{max-width:760px}
+.article p{margin:0 0 1.15em;max-width:68ch}
+.ah{font-size:clamp(26px,3.4vw,34px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:56px 0 18px}
+.ah:first-child{margin-top:0}
+.pull{margin:48px 0;padding:28px 32px;background:var(--w-mist);border:1.5px solid var(--w-ink);font-size:clamp(20px,2.6vw,26px);line-height:1.35;letter-spacing:-.01em}
+.article .flow p{font-size:16px;margin:0}
+.further{margin-top:56px}
+article.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+@media (max-width:820px){.pull{padding:22px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span class="brand">Wantalyze // Lab Notes</span>
+  <span class="status"><span><span class="dot"></span>Blog</span><span class="hide">06.15°N · 75.37°W</span><span class="hide">13.11.2026</span></span>
+</nav>
+
+<header class="hero">
+  <div class="vertical"><span class="jp">記録</span> · Serie Biblioteca Vintage · 005</div>
+  <div class="wrap">
+    <div>
+      <span class="label">[ LAB NOTES ] // cibernética y sistemas</span>
+      <h1>Una reunión con forma de <em class="serif">icosaedro</em></h1>
+      <p class="dek">En 1994 Stafford Beer propuso que una conferencia de treinta personas siguiera la geometría de un sólido platónico. La pregunta que dejó abierta sigue vigente: cómo lograr que una conversación grande piense mejor que la suma de sus partes.</p>
+      <p class="byline">Por Juan Villada · Wantalyze · 13.11.2026 · ≈ 4 min</p>
+    </div>
+    <figure class="plate crop" style="margin:0" aria-label="Lámina: icosaedro visto desde un vértice. Cada vértice es un tema (12) y cada arista una persona (30); un tema queda oculto detrás del centro.">
+      <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Icosaedro visto desde un vértice, con temas en los vértices y personas en las aristas">
+        <g fill="none" stroke-linejoin="round">
+          <path d="M300 130L397 76.5L456.9 261L300 375L143.1 261L203 76.5Z" stroke="#111827" stroke-width="2"/>
+          <path d="M203 76.5L300 130L397 76.5L376.1 185.3L456.9 261L347 274.7L300 375L253 274.7L143.1 261L223.9 185.3Z" stroke="#00569E" stroke-width="1.5"/>
+          <path d="M300 130L376.1 185.3L347 274.7L253 274.7L223.9 185.3Z" stroke="#00569E" stroke-width="1.5"/>
+          <path d="M300 210L300 130M300 210L376.1 185.3M300 210L347 274.7M300 210L253 274.7M300 210L223.9 185.3" stroke="#00569E" stroke-width="1.5"/>
+          <line x1="376.1" y1="185.3" x2="456.9" y2="261" stroke="#111827" stroke-width="4"/>
+          <line x1="40" y1="76.5" x2="40" y2="375" stroke="#111827" stroke-width="1"/>
+          <line x1="32" y1="76.5" x2="48" y2="76.5" stroke="#111827" stroke-width="1"/>
+          <line x1="32" y1="375" x2="48" y2="375" stroke="#111827" stroke-width="1"/>
+          <line x1="44" y1="76.5" x2="200" y2="76.5" stroke="#111827" stroke-width=".75" stroke-dasharray="3 4"/>
+          <line x1="44" y1="375" x2="296" y2="375" stroke="#111827" stroke-width=".75" stroke-dasharray="3 4"/>
+          <circle cx="300" cy="130" r="5" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/>
+          <circle cx="456.9" cy="261" r="5" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/>
+        </g>
+        <circle cx="300" cy="210" r="7" fill="#00B5F8" stroke="#111827" stroke-width="1.5"/>
+        <g font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="11" fill="#111827" letter-spacing="1">
+          <text x="24" y="230" transform="rotate(-90 24 230)">5 DÍAS · 30 PERSONAS</text>
+          <text x="420" y="214" fill="#00569E">ARISTA = PERSONA (30)</text>
+          <text x="312" y="122">VÉRTICE = TEMA (12)</text>
+          <text x="316" y="226">TEMA OCULTO TRAS EL CENTRO</text>
+        </g>
+      </svg>
+      <figcaption class="plate-cap" style="padding:0 12px 10px"><span>Fig. 1 — Icosaedro, vista desde un vértice</span><span>Esquema interpretativo</span></figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <article class="s">
+    <div class="wrap article">
+      <h2 class="ah">De una economía a una <em class="serif">sala</em></h2>
+      <p class="drop">Stafford Beer (1926–2002) pasó cuatro décadas aplicando la cibernética a las organizaciones. Venía de diseñar Cybersyn en Chile, un sistema pensado para una economía entera. En su último libro, <i>Beyond Dispute: The Invention of Team Syntegrity</i> (1994), cambió de escala y se ocupó de un problema mucho más doméstico: por qué las buenas ideas de un congreso nacen en los pasillos y no en las mesas.</p>
+      <p>Su respuesta fue una conferencia sin jerarquía para unas treinta personas. La llamó <i>syntegration</i>, un cruce entre sinergia e integración, con un guiño a la tensegridad de Buckminster Fuller.</p>
+
+      <h2 class="ah">La geometría decide quién <em class="serif">habla</em></h2>
+      <p>La estructura la dicta un sólido platónico. El icosaedro tiene 12 vértices y 30 aristas: cada vértice es un tema y cada arista es una persona. Como toda arista une dos vértices, cada participante es miembro de los dos equipos que conecta, crítico en otros dos y observador en el resto.</p>
+      <p>La lámina lo muestra visto desde un vértice. Los puntos son temas y las líneas, personas; la arista gruesa es un participante concreto, sentado entre dos temas. Uno de los doce queda escondido detrás del centro, y esa es la gracia del sólido: no hay borde ni periferia, todo vértice tiene la misma cantidad de vecinos.</p>
+      <p>El proceso tiene dos fases. Primero, el grupo depura cientos de enunciados hasta quedarse con doce temas. Después, los equipos se reúnen en rondas durante varios días. Los participantes eligen libremente de qué hablar; la geometría decide quién habla con quién, cuándo y en qué rol.</p>
+
+      <h2 class="ah">Ideas que vuelven <em class="serif">transformadas</em></h2>
+      <p>El efecto que Beer buscaba lo llamó <i>reverberación</i>. En un sistema cerrado, lo que se dice en un vértice viaja por las aristas, pasa por otros equipos y regresa modificado, hasta que el grupo converge. Nadie tiene que resumir ni arbitrar; la forma de la red hace ese trabajo.</p>
+      <p>El método tuvo vida fuera del libro. Beer cofundó con Joe Truss la empresa Team Syntegrity Inc., y con los años aparecieron versiones más pequeñas, como la basada en un octaedro que ensayó Albakri Ahmad en su tesis de 1999.</p>
+
+      <blockquote class="pull">La calidad de una conversación grande depende menos de quién habla que de la <em class="serif">topología</em> que conecta a los que hablan.</blockquote>
+
+      <h2 class="ah">Lo que cambia con la <em class="serif">IA</em></h2>
+      <p>En su forma original, la syntegration pedía treinta personas, cinco días, facilitadores entrenados y mucho papel. Depurar cientos de enunciados hasta doce temas era trabajo manual, y la reverberación se intuía más de lo que se observaba. Si faltaba gente, el sólido quedaba incompleto.</p>
+      <p>Los modelos de lenguaje abaratan buena parte de ese esfuerzo: ordenar ideas sueltas, registrar lo que se dice y notar qué conceptos circulan ya no exige semanas de trabajo manual. También abren una pregunta que Beer no podía plantearse, la de qué lugar ocupan los agentes en una conversación pensada para personas. Un estudio de Christoph Riedl presentado en ICLR 2026 sugiere que, cuando cada agente tiene una perspectiva propia y anticipa a los demás, el grupo produce complementariedad real en lugar de eco.</p>
+
+      <h2 class="ah">Lo que nos <em class="serif">llevamos</em></h2>
+      <p>La lección más duradera de Beer es que la estructura de una conversación es una decisión de diseño, no un accidente. Muchas reuniones fallan no por falta de talento, sino porque su forma reparte la palabra de manera desigual: el centro habla y la periferia escucha. El icosaedro elimina la periferia por construcción, y con ella la necesidad de que alguien arbitre.</p>
+      <p>La idea se traslada bien a quien construye software o productos. En un equipo, en una arquitectura o en un sistema de agentes, las conexiones determinan qué información circula y cuánto se transforma por el camino. Antes de preguntar quién debe decidir, conviene preguntar por dónde viajan las ideas y si tienen forma de volver. Una buena topología no reemplaza el criterio de las personas, pero hace que ese criterio se encuentre más a menudo.</p>
+
+      <div class="further">
+        <span class="label">// Para leer más</span>
+        <ul class="shelf" style="margin-top:12px">
+          <li><span class="n">A</span><span><b>Synergetics</b> — R. Buckminster Fuller (1975). La geometría de la que Beer tomó la tensegridad y la idea de que todo sistema es un poliedro.</span></li>
+          <li><span class="n">B</span><span><b>Brain of the Firm</b> — Stafford Beer (1972). El Modelo de Sistema Viable, el marco que la syntegration intentaba equilibrar entre la operación y el futuro.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <section class="s" style="border-bottom:0">
+    <div class="wrap">
+      <span class="label">// Fuentes</span>
+      <ol class="sources" style="margin-top:16px">
+        <li><a href="https://www.jucs.org/jukm_0_1/stafford_beers_syntegration_as/nittbaur.html">Nittbaur, G. — Stafford Beer's Syntegration as a Renascence of the Ancient Greek Agora (2005)</a></li>
+        <li><a href="https://library.uniteddiversity.coop/Community_Dialogue_and_Meetings/Team%20Syntegrity-A_New_Methodology_for_Group_Work.pdf">Leonard, A. — Team Syntegrity: A New Methodology for Group Work (1996)</a></li>
+        <li><a href="https://web3.isss.org/primer2/asem25ms.html">Schwaninger, M. — The Team Syntegrity Model (1997)</a></li>
+        <li><a href="https://metaphorum.org/?p=343">Metaphorum — Team Syntegrity</a></li>
+        <li><a href="https://core.ac.uk/download/74237701.pdf">Ahmad, A. — A Pluralist Perspective of Team Syntegrity (1999)</a></li>
+        <li><a href="https://arxiv.org/abs/2510.05174">Riedl, C. — Emergent Coordination in Multi-Agent Language Models (ICLR 2026)</a></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="motto">Want it. Analyze it. Build it<b>.</b></p>
+    <div class="meta"><span>Wantalyze · Lab Notes</span><span>Serie Biblioteca Vintage · 005</span><span>06.15°N · 75.37°W</span><span>© 2026</span></div>
+  </div>
+</footer>
+
+<svg class="grain" aria-hidden="true" width="100%" height="100%">
+  <filter id="w-noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#w-noise)" opacity="0.05"/>
+</svg>
+
+</body>
+</html>

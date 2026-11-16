@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El arca de los papelitos · Wantalyze</title>
+<meta property="og:image" content="miniatura.png">
+<meta property="og:title" content="El arca de los papelitos · Wantalyze">
+<meta name="description" content="Hacia 1640, Thomas Harrison diseñó un armario para colgar notas sueltas bajo epígrafes fijos. Su diseño deja una lección vigente sobre cómo ordenar el conocimiento cuando extraerlo cuesta poco.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Silkscreen&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --w-paper:#F9FEFD;--w-base:#F9FAFB;--w-line:#E5E7EB;--w-ink:#111827;--w-deep:#00569E;
+  --w-signal:#00B5F8;--w-sky:#47C5FB;--w-glow:#62CFFE;--w-mist:#E0F1FF;
+  --w-grid-major:rgba(0,86,158,.10);--w-grid-minor:rgba(0,86,158,.05);
+  --w-font-sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,sans-serif;
+  --w-font-mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,monospace;
+  --w-font-serif:"New York",ui-serif,"Instrument Serif",Georgia,serif;
+  --w-font-pixel:"Silkscreen","VT323",monospace;
+  --w-font-jp:"Hiragino Sans","Noto Sans JP",sans-serif;
+  --w-ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--w-paper);color:var(--w-ink);font-family:var(--w-font-sans);-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.6}
+a{color:var(--w-deep);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--w-signal)}
+.label{font:500 11px/1.3 var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+.mono{font-family:var(--w-font-mono)}
+em.serif{font-family:var(--w-font-serif);font-style:italic;font-weight:400}
+/* NAV */
+.nav{position:sticky;top:0;z-index:10;background:var(--w-paper);border-bottom:1px solid var(--w-ink);display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 24px}
+.nav .brand{font:500 11px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+.nav .status{font:500 11px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);display:flex;gap:16px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--w-signal);margin-right:6px;vertical-align:1px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative}
+/* HERO */
+.hero{background:linear-gradient(var(--w-paper),var(--w-mist));border-bottom:1px solid var(--w-line);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;padding-top:64px;padding-bottom:64px;align-items:center}
+.hero h1{font-weight:900;font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-.035em;margin:16px 0 24px}
+.hero h1 em{font-size:1.05em;color:var(--w-deep)}
+.ficha{border-top:1.5px solid var(--w-ink);padding-top:12px;display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font:13px/1.45 var(--w-font-mono)}
+.ficha dt{color:var(--w-deep);text-transform:uppercase;letter-spacing:.1em;font-size:11px;padding-top:2px}
+.ficha dd{margin:0}
+.vertical{position:absolute;right:10px;top:84px;writing-mode:vertical-rl;font:500 11px var(--w-font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--w-deep)}
+.vertical .jp{font-family:var(--w-font-jp);letter-spacing:.3em}
+.plate{position:relative;background-color:var(--w-paper);border:1.5px solid var(--w-ink);
+  background-image:linear-gradient(var(--w-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-major) 1px,transparent 1px),linear-gradient(var(--w-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-minor) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px,8px 8px,8px 8px;box-shadow:6px 6px 0 var(--w-deep)}
+.plate svg{display:block;width:100%;height:auto}
+.crop::before,.crop::after{content:"";position:absolute;width:18px;height:18px;border:0 solid var(--w-ink)}
+.crop::before{top:-10px;left:-10px;border-width:1px 0 0 1px}
+.crop::after{bottom:-10px;right:-10px;border-width:0 1px 1px 0}
+.plate-cap{display:flex;justify-content:space-between;margin-top:14px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+/* SECTIONS */
+section.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+.s-head{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.s-head h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0;font-weight:700}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.margin-note{font:500 11px/1.6 var(--w-font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--w-deep);border-left:1.5px solid var(--w-deep);padding-left:12px;align-self:start}
+.prose{max-width:68ch}
+.prose p{margin:0 0 1.1em}
+.drop::first-letter{font-family:var(--w-font-serif);font-size:3.6em;float:left;line-height:.85;padding:6px 10px 0 0;color:var(--w-deep)}
+.core{background:var(--w-mist);border:1.5px solid var(--w-ink);padding:36px 40px;position:relative}
+.core p{font-size:clamp(20px,2.6vw,27px);line-height:1.35;margin:0;letter-spacing:-.01em;max-width:34ch}
+.core .label{position:absolute;top:-10px;left:24px;background:var(--w-paper);padding:0 8px}
+/* windows */
+.win{background:var(--w-paper);border:2px solid var(--w-ink);border-radius:2px;box-shadow:6px 6px 0 var(--w-deep)}
+.win-bar{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-bottom:2px solid var(--w-ink)}
+.win-title{font:12px/1 var(--w-font-pixel);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.win-hatch{flex:1;height:12px;background:repeating-linear-gradient(to bottom,var(--w-ink) 0 2px,transparent 2px 4px)}
+.win-x{width:20px;height:20px;border:2px solid var(--w-ink);display:grid;place-items:center;font:13px/1 var(--w-font-mono)}
+.win-body{padding:20px}
+.win.inv .win-body{background:var(--w-ink);color:var(--w-paper)}
+.win.inv .win-body .label{color:var(--w-glow)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.duo h3,.flow h3{margin:8px 0 8px;font-size:22px;letter-spacing:-.01em}
+.duo p,.flow p{margin:0;font-size:16px}
+.log{font:14px/1.7 var(--w-font-mono)}
+.log .ok{color:var(--w-deep)}
+.log b{font-weight:500}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--w-ink)}
+.flow > div{padding:28px 24px;position:relative}
+.flow > div + div{border-left:1.5px solid var(--w-ink)}
+.flow .num{font:900 64px/1 var(--w-font-sans);letter-spacing:-.04em;color:var(--w-mist);-webkit-text-stroke:1.5px var(--w-deep)}
+.flow .icon{position:absolute;top:28px;right:24px}
+.flow .build{background:var(--w-base)}
+.chip{display:inline-block;border:1px solid var(--w-ink);border-radius:999px;padding:2px 10px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;margin-top:14px}
+/* mesh + shelf */
+.mesh-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.shelf{list-style:none;padding:0;margin:0}
+.shelf li{border-top:1px solid var(--w-line);padding:16px 0;display:grid;grid-template-columns:48px 1fr;gap:12px}
+.shelf li:last-child{border-bottom:1px solid var(--w-line)}
+.shelf .n{font:500 12px var(--w-font-mono);color:var(--w-deep)}
+.shelf b{font-weight:600}
+.sources{font:13px/1.8 var(--w-font-mono);columns:2;column-gap:40px;padding-left:18px;margin:0}
+/* footer */
+footer{background:var(--w-ink);color:var(--w-paper);padding:56px 0 40px}
+footer .motto{font:500 13px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+footer .motto b{color:var(--w-signal);font-weight:500}
+footer .meta{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;margin-top:32px;font:500 11px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-glow)}
+.seg{display:flex;gap:3px;margin-top:20px}
+.seg i{width:14px;height:8px;border:1px solid var(--w-glow)}
+.seg i.on{background:var(--w-glow)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50}
+@keyframes orbit{to{transform:rotate(360deg)}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+@media (max-width:820px){
+  .hero .wrap,.duo,.mesh-grid,.cols{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow > div + div{border-left:0;border-top:1.5px solid var(--w-ink)}
+  .vertical{display:none}
+  .nav .status span.hide{display:none}
+  .sources{columns:1}
+  .core{padding:28px 22px}
+}
+
+.dek{font-size:20px;line-height:1.45;max-width:34ch;margin:0 0 20px;color:var(--w-ink)}
+.byline{font:500 12px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);border-top:1.5px solid var(--w-ink);padding-top:12px;margin:0}
+.article{max-width:760px}
+.article p{margin:0 0 1.15em;max-width:68ch}
+.ah{font-size:clamp(26px,3.4vw,34px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:56px 0 18px}
+.ah:first-child{margin-top:0}
+.pull{margin:48px 0;padding:28px 32px;background:var(--w-mist);border:1.5px solid var(--w-ink);font-size:clamp(20px,2.6vw,26px);line-height:1.35;letter-spacing:-.01em}
+.article .flow p{font-size:16px;margin:0}
+.further{margin-top:56px}
+article.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+@media (max-width:820px){.pull{padding:22px}}
+</style>
+<body>
+<nav class="nav">
+  <span class="brand">Wantalyze // Lab Notes</span>
+  <span class="status"><span><span class="dot"></span>Blog</span><span class="hide">06.15°N · 75.37°W</span><span class="hide">15.11.2026</span></span>
+</nav>
+
+<header class="hero">
+  <div class="vertical"><span class="jp">記録</span> · Serie Biblioteca Vintage · 007</div>
+  <div class="wrap">
+    <div>
+      <span class="label">[ LAB NOTES ] // hipertexto y amplificar la mente</span>
+      <h1>El arca de los <em class="serif">papelitos</em></h1>
+      <p class="dek">Hacia 1640, un clérigo de Londres diseñó un armario para colgar notas sueltas bajo epígrafes que no cambiaban. Casi cuatro siglos después, su diseño sigue enseñando a ordenar lo que sabemos.</p>
+      <p class="byline">Por Juan Villada · Wantalyze · 15.11.2026 · ≈ 4 min</p>
+    </div>
+    <figure class="plate crop" style="margin:0" aria-label="Lámina: el arca de estudios. Un armario con listones giratorios rotulados con epígrafes en orden alfabético; al girar un listón aparecen en su reverso ganchos de los que cuelgan papeletas sueltas. Admite hasta 3000 epígrafes y va sobre ruedas.">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="10" role="img" aria-label="Lámina ilustrativa del armario de notas con listones giratorios, ganchos y papeletas">
+        <text x="40" y="26" fill="#00569E" letter-spacing="1.5">ARCA STUDIORUM // LÁMINA ILUSTRATIVA</text>
+        <rect x="40" y="40" width="260" height="276" fill="none" stroke="#111827" stroke-width="2"/>
+        <rect x="52" y="56" width="236" height="36" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <rect x="52" y="100" width="236" height="36" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <rect x="52" y="144" width="236" height="36" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <rect x="52" y="188" width="236" height="36" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <rect x="52" y="232" width="236" height="36" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <text x="64" y="78" fill="#111827">ABSTINENTIA</text>
+        <text x="64" y="122" fill="#111827">BIBLIA</text>
+        <text x="64" y="166" fill="#111827">CERA</text>
+        <text x="64" y="210" fill="#111827">DOLOR</text>
+        <text x="64" y="254" fill="#111827">ELOQUENTIA</text>
+        <line x1="52" y1="290" x2="288" y2="290" stroke="#111827" stroke-width="1.5"/>
+        <circle cx="84" cy="330" r="10" fill="none" stroke="#111827" stroke-width="1.5"/>
+        <circle cx="256" cy="330" r="10" fill="none" stroke="#111827" stroke-width="1.5"/>
+        <line x1="288" y1="162" x2="332" y2="140" stroke="#00569E" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="332" y="104" fill="#00569E">LISTÓN GIRADO</text>
+        <text x="332" y="118" fill="#111827">REVERSO: GANCHOS</text>
+        <rect x="332" y="126" width="124" height="28" fill="none" stroke="#111827" stroke-width="1.5"/>
+        <circle cx="352" cy="146" r="3" fill="none" stroke="#111827" stroke-width="1.5"/>
+        <circle cx="394" cy="146" r="3" fill="none" stroke="#111827" stroke-width="1.5"/>
+        <circle cx="436" cy="146" r="3" fill="none" stroke="#111827" stroke-width="1.5"/>
+        <rect x="344" y="152" width="16" height="40" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <rect x="386" y="152" width="16" height="56" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <rect x="428" y="152" width="16" height="30" fill="none" stroke="#00569E" stroke-width="1.5"/>
+        <text x="332" y="232" fill="#111827">PAPELETAS SUELTAS</text>
+        <text x="332" y="246" fill="#00569E">SE MUEVEN, NO SE PIERDEN</text>
+        <line x1="22" y1="40" x2="22" y2="316" stroke="#00569E" stroke-width="1"/>
+        <line x1="16" y1="40" x2="28" y2="40" stroke="#00569E" stroke-width="1"/>
+        <line x1="16" y1="316" x2="28" y2="316" stroke="#00569E" stroke-width="1"/>
+        <text x="14" y="300" fill="#00569E" transform="rotate(-90 14 300)">HASTA 3000 EPÍGRAFES (A-Z)</text>
+        <circle cx="394" cy="146" r="4" fill="#00B5F8" stroke="#00B5F8"/>
+        <text x="332" y="300" fill="#111827">SOBRE RUEDAS: TRANSPORTABLE</text>
+      </svg>
+      <figcaption class="plate-cap" style="padding:0 12px 10px"><span>Fig. 1 — Arca studiorum, esquema</span><span>Reconstrucción interpretativa</span></figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <article class="s">
+    <div class="wrap article">
+      <h2 class="ah">Un mueble contra el <em class="serif">olvido</em></h2>
+      <p class="drop">Hacia 1640, en Londres, un clérigo que había perdido su parroquia, Thomas Harrison, escribió un manuscrito sobre una invención a la que llamó <i>Arca studiorum</i>: el arca de los estudios. No era un libro ni un método abstracto, sino un mueble. Un armario de madera pensado para guardar lo que uno lee sin tener que recordarlo.</p>
+      <p>Harrison se movía en el círculo de Samuel Hartlib, una red de reformadores inspirados en Francis Bacon que soñaba con un conocimiento construido entre muchos. En noviembre de 1647 pidió al Parlamento que adoptara su método para ordenar todos sus registros. La petición no prosperó, y Harrison murió en septiembre de 1649.</p>
+      <p>La idea, sin embargo, no murió con él. Cuatro décadas después, el profesor hamburgués Vincent Placcius reprodujo y corrigió el manuscrito dentro de <i>De arte excerpendi</i> (1689), un manual sobre el arte de extractar lecturas. Solo se sabe de dos armarios construidos: el de Placcius y el de Leibniz, que admitía olvidar casi todo lo que hacía. Ninguno de los dos ha sobrevivido.</p>
+
+      <h2 class="ah">Listones, ganchos y <em class="serif">papeletas</em></h2>
+      <p>La lámina de arriba es una reconstrucción interpretativa del mecanismo. El frente del armario está hecho de listones giratorios. En la cara visible de cada listón va escrito un epígrafe temático, en orden alfabético. Al girarlo aparece el reverso, donde hay ganchos. Ahí se clavan papeletas sueltas, cada una con un extracto de lectura.</p>
+      <p>El armario admitía hasta tres mil epígrafes. Las papeletas se podían descolgar, mover a otro gancho y recombinar sin que el conjunto se desordenara, porque la estructura —los epígrafes— no se movía. Cuando el trabajo terminaba, el arca se cerraba y viajaba en un carro.</p>
+      <p>El historiador Alberto Cevolini, que publicó en 2017 la primera edición crítica del manuscrito, lo describe como un motor de búsqueda anterior a la máquina: una memoria secundaria que permite olvidar con tranquilidad, porque lo importante ya está colgado en su sitio. Para esta historia nos apoyamos en la nota de <a href="https://takenote.library.harvard.edu/73-ultimate-piece-office-furniture">Harvard Library</a>, en el artículo del <a href="https://www.jhiblog.org/?p=10594">Journal of the History of Ideas Blog</a> sobre Harrison y en la <a href="https://www.brepols.net/products/IS-9782503575230-1">edición crítica de Cevolini en Brepols</a>.</p>
+
+      <blockquote class="pull">El índice no crece sin control: es un frente <em class="serif">finito</em> que se ve de un vistazo. Lo que se mueve son los fragmentos, cada uno con su fuente.</blockquote>
+
+      <h2 class="ah">Del copista al <em class="serif">modelo</em></h2>
+      <p>En el siglo XVII extractar era un oficio manual: cortar el papel, copiar el pasaje, anotar la fuente y decidir en qué gancho colgarlo. El cuello de botella era el tiempo de copia, y por eso el armario solo estuvo al alcance de eruditos con recursos. Aun así, el diseño ya resolvía el problema del exceso: epígrafes fijos y visibles, fragmentos móviles.</p>
+      <p>Hoy un modelo de lenguaje puede hacer buena parte del trabajo del copista: leer un texto largo y separar pasajes literales con su fuente. Ese cambio abarata el corte casi por completo, pero deja intacta la otra mitad del problema, la que Harrison resolvió con madera. Cuando extraer cuesta poco, la pregunta decisiva vuelve a ser bajo qué estructura se guarda lo extraído.</p>
+
+      <h2 class="ah">Lo que nos <em class="serif">llevamos</em></h2>
+      <p>La primera lección es que la estructura vale más cuando es escasa. Harrison no dejó que el índice creciera al ritmo de las notas: lo fijó de antemano y lo puso a la vista, de modo que cualquiera pudiera abarcarlo de un vistazo. Quien diseña software o productos conoce bien la tentación contraria, la de añadir una categoría, un campo o una etiqueta cada vez que algo no encaja. El arca recuerda que un límite elegido con cuidado no estorba: es lo que mantiene legible el conjunto.</p>
+      <p>La segunda es separar lo que debe quedarse quieto de lo que debe moverse. En el armario, los epígrafes no cambiaban y las papeletas sí, y por eso se podían recombinar sin perder el orden. Muchos sistemas fallan justo porque mezclan las dos cosas. Harrison quería un mueble que le permitiera olvidar sin perder nada; su disciplina sigue vigente con cualquier herramienta: pocos epígrafes, siempre a la vista, y fragmentos que se mueven sin desordenar lo demás.</p>
+
+      <div class="further">
+        <span class="label">// Para leer más</span>
+        <ul class="shelf" style="margin-top:12px">
+          <li><span class="n">A</span><span><b>Too Much to Know</b> — Ann Blair (2010). Cómo los eruditos del Renacimiento y el Barroco manejaron la sobrecarga de información con florilegios, índices y papeletas.</span></li>
+          <li><span class="n">B</span><span><b>Paper Machines</b> — Markus Krajewski (2011). El fichero como máquina de datos, de Gessner a las oficinas del siglo XX.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <section class="s" style="border-bottom:0">
+    <div class="wrap">
+      <span class="label">// Fuentes</span>
+      <ol class="sources" style="margin-top:16px">
+        <li><a href="https://takenote.library.harvard.edu/73-ultimate-piece-office-furniture">Harvard Library, Take Note — 73. The ultimate piece of office furniture</a></li>
+        <li><a href="https://www.jhiblog.org/?p=10594">Journal of the History of Ideas Blog — sobre Thomas Harrison</a></li>
+        <li><a href="https://www.brepols.net/products/IS-9782503575230-1">Brepols — Thomas Harrison, The Ark of Studies, ed. Cevolini</a></li>
+        <li><a href="https://search.worldcat.org/oclc/22260654">WorldCat — Placcius, De arte excerpendi (1689)</a></li>
+        <li><a href="https://nbn-resolving.org/urn:nbn:de:bvb:12-bsb11277644-6">Bayerische Staatsbibliothek — copia digital de 1689</a></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="motto">Want it. Analyze it. Build it<b>.</b></p>
+    <div class="meta"><span>Wantalyze · Lab Notes</span><span>Serie Biblioteca Vintage · 007</span><span>06.15°N · 75.37°W</span><span>© 2026</span></div>
+  </div>
+</footer>
+
+<svg class="grain" aria-hidden="true" width="100%" height="100%">
+  <filter id="w-noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#w-noise)" opacity="0.05"/>
+</svg>
+
+</body>
+</html>

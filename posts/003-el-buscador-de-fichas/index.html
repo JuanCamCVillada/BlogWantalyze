@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El buscador de fichas · Wantalyze</title>
+<meta property="og:image" content="miniatura.png">
+<meta property="og:title" content="El buscador de fichas · Wantalyze">
+<meta name="description" content="Desde 1896, un fichero de Bruselas respondía preguntas por correo con fichas de un solo hecho y su fuente. La historia de una idea sobre cómo partir el conocimiento en piezas comprobables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Silkscreen&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --w-paper:#F9FEFD;--w-base:#F9FAFB;--w-line:#E5E7EB;--w-ink:#111827;--w-deep:#00569E;
+  --w-signal:#00B5F8;--w-sky:#47C5FB;--w-glow:#62CFFE;--w-mist:#E0F1FF;
+  --w-grid-major:rgba(0,86,158,.10);--w-grid-minor:rgba(0,86,158,.05);
+  --w-font-sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,sans-serif;
+  --w-font-mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,monospace;
+  --w-font-serif:"New York",ui-serif,"Instrument Serif",Georgia,serif;
+  --w-font-pixel:"Silkscreen","VT323",monospace;
+  --w-font-jp:"Hiragino Sans","Noto Sans JP",sans-serif;
+  --w-ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--w-paper);color:var(--w-ink);font-family:var(--w-font-sans);-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.6}
+a{color:var(--w-deep);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--w-signal)}
+.label{font:500 11px/1.3 var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+.mono{font-family:var(--w-font-mono)}
+em.serif{font-family:var(--w-font-serif);font-style:italic;font-weight:400}
+/* NAV */
+.nav{position:sticky;top:0;z-index:10;background:var(--w-paper);border-bottom:1px solid var(--w-ink);display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 24px}
+.nav .brand{font:500 11px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+.nav .status{font:500 11px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);display:flex;gap:16px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--w-signal);margin-right:6px;vertical-align:1px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative}
+/* HERO */
+.hero{background:linear-gradient(var(--w-paper),var(--w-mist));border-bottom:1px solid var(--w-line);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;padding-top:64px;padding-bottom:64px;align-items:center}
+.hero h1{font-weight:900;font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-.035em;margin:16px 0 24px}
+.hero h1 em{font-size:1.05em;color:var(--w-deep)}
+.ficha{border-top:1.5px solid var(--w-ink);padding-top:12px;display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font:13px/1.45 var(--w-font-mono)}
+.ficha dt{color:var(--w-deep);text-transform:uppercase;letter-spacing:.1em;font-size:11px;padding-top:2px}
+.ficha dd{margin:0}
+.vertical{position:absolute;right:10px;top:84px;writing-mode:vertical-rl;font:500 11px var(--w-font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--w-deep)}
+.vertical .jp{font-family:var(--w-font-jp);letter-spacing:.3em}
+.plate{position:relative;background-color:var(--w-paper);border:1.5px solid var(--w-ink);
+  background-image:linear-gradient(var(--w-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-major) 1px,transparent 1px),linear-gradient(var(--w-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-minor) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px,8px 8px,8px 8px;box-shadow:6px 6px 0 var(--w-deep)}
+.plate svg{display:block;width:100%;height:auto}
+.crop::before,.crop::after{content:"";position:absolute;width:18px;height:18px;border:0 solid var(--w-ink)}
+.crop::before{top:-10px;left:-10px;border-width:1px 0 0 1px}
+.crop::after{bottom:-10px;right:-10px;border-width:0 1px 1px 0}
+.plate-cap{display:flex;justify-content:space-between;margin-top:14px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+/* SECTIONS */
+section.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+.s-head{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.s-head h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0;font-weight:700}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.margin-note{font:500 11px/1.6 var(--w-font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--w-deep);border-left:1.5px solid var(--w-deep);padding-left:12px;align-self:start}
+.prose{max-width:68ch}
+.prose p{margin:0 0 1.1em}
+.drop::first-letter{font-family:var(--w-font-serif);font-size:3.6em;float:left;line-height:.85;padding:6px 10px 0 0;color:var(--w-deep)}
+.core{background:var(--w-mist);border:1.5px solid var(--w-ink);padding:36px 40px;position:relative}
+.core p{font-size:clamp(20px,2.6vw,27px);line-height:1.35;margin:0;letter-spacing:-.01em;max-width:34ch}
+.core .label{position:absolute;top:-10px;left:24px;background:var(--w-paper);padding:0 8px}
+/* windows */
+.win{background:var(--w-paper);border:2px solid var(--w-ink);border-radius:2px;box-shadow:6px 6px 0 var(--w-deep)}
+.win-bar{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-bottom:2px solid var(--w-ink)}
+.win-title{font:12px/1 var(--w-font-pixel);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.win-hatch{flex:1;height:12px;background:repeating-linear-gradient(to bottom,var(--w-ink) 0 2px,transparent 2px 4px)}
+.win-x{width:20px;height:20px;border:2px solid var(--w-ink);display:grid;place-items:center;font:13px/1 var(--w-font-mono)}
+.win-body{padding:20px}
+.win.inv .win-body{background:var(--w-ink);color:var(--w-paper)}
+.win.inv .win-body .label{color:var(--w-glow)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.duo h3,.flow h3{margin:8px 0 8px;font-size:22px;letter-spacing:-.01em}
+.duo p,.flow p{margin:0;font-size:16px}
+.log{font:14px/1.7 var(--w-font-mono)}
+.log .ok{color:var(--w-deep)}
+.log b{font-weight:500}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--w-ink)}
+.flow > div{padding:28px 24px;position:relative}
+.flow > div + div{border-left:1.5px solid var(--w-ink)}
+.flow .num{font:900 64px/1 var(--w-font-sans);letter-spacing:-.04em;color:var(--w-mist);-webkit-text-stroke:1.5px var(--w-deep)}
+.flow .icon{position:absolute;top:28px;right:24px}
+.flow .build{background:var(--w-base)}
+.chip{display:inline-block;border:1px solid var(--w-ink);border-radius:999px;padding:2px 10px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;margin-top:14px}
+/* mesh + shelf */
+.mesh-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.shelf{list-style:none;padding:0;margin:0}
+.shelf li{border-top:1px solid var(--w-line);padding:16px 0;display:grid;grid-template-columns:48px 1fr;gap:12px}
+.shelf li:last-child{border-bottom:1px solid var(--w-line)}
+.shelf .n{font:500 12px var(--w-font-mono);color:var(--w-deep)}
+.shelf b{font-weight:600}
+.sources{font:13px/1.8 var(--w-font-mono);columns:2;column-gap:40px;padding-left:18px;margin:0}
+/* footer */
+footer{background:var(--w-ink);color:var(--w-paper);padding:56px 0 40px}
+footer .motto{font:500 13px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+footer .motto b{color:var(--w-signal);font-weight:500}
+footer .meta{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;margin-top:32px;font:500 11px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-glow)}
+.seg{display:flex;gap:3px;margin-top:20px}
+.seg i{width:14px;height:8px;border:1px solid var(--w-glow)}
+.seg i.on{background:var(--w-glow)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50}
+@keyframes orbit{to{transform:rotate(360deg)}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+@media (max-width:820px){
+  .hero .wrap,.duo,.mesh-grid,.cols{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow > div + div{border-left:0;border-top:1.5px solid var(--w-ink)}
+  .vertical{display:none}
+  .nav .status span.hide{display:none}
+  .sources{columns:1}
+  .core{padding:28px 22px}
+}
+
+.dek{font-size:20px;line-height:1.45;max-width:34ch;margin:0 0 20px;color:var(--w-ink)}
+.byline{font:500 12px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);border-top:1.5px solid var(--w-ink);padding-top:12px;margin:0}
+.article{max-width:760px}
+.article p{margin:0 0 1.15em;max-width:68ch}
+.ah{font-size:clamp(26px,3.4vw,34px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:56px 0 18px}
+.ah:first-child{margin-top:0}
+.pull{margin:48px 0;padding:28px 32px;background:var(--w-mist);border:1.5px solid var(--w-ink);font-size:clamp(20px,2.6vw,26px);line-height:1.35;letter-spacing:-.01em}
+.article .flow p{font-size:16px;margin:0}
+.further{margin-top:56px}
+article.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+@media (max-width:820px){.pull{padding:22px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span class="brand">Wantalyze // Lab Notes</span>
+  <span class="status"><span><span class="dot"></span>Blog</span><span class="hide">06.15°N · 75.37°W</span><span class="hide">11.11.2026</span></span>
+</nav>
+
+<header class="hero">
+  <div class="vertical"><span class="jp">記録</span> · Serie Biblioteca Vintage · 003</div>
+  <div class="wrap">
+    <div>
+      <span class="label">[ LAB NOTES ] // hipertexto y amplificar la mente</span>
+      <h1>El buscador de <em class="serif">fichas</em></h1>
+      <p class="dek">En 1896, en Bruselas, ya se podía mandar una pregunta por correo y recibir de vuelta un paquete de fichas con la respuesta. Nadie lo llamaba buscador, pero funcionaba como uno.</p>
+      <p class="byline">Por Juan Villada · Wantalyze · 11.11.2026 · ≈ 4 min</p>
+    </div>
+    <figure class="plate crop" style="margin:0" aria-label="Lámina: el fichero del Répertoire bibliographique universel. Un cajón de fichas abierto; de él sale una ficha de 3 × 5 pulgadas con un código CDU, un hecho, su fuente y una referencia cruzada. Abajo, un sobre de consulta por correo de 1896 y la advertencia de acotar cuando la respuesta supera 50 fichas.">
+      <svg viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="11" fill="none" stroke-width="1.5">
+        <text x="20" y="28" fill="#00569E" stroke="none" letter-spacing="1.5">RBU · FICHERO · 1895–1934</text>
+        <rect x="30" y="150" width="150" height="200" stroke="#111827"/>
+        <line x1="30" y1="250" x2="180" y2="250" stroke="#111827"/>
+        <rect x="60" y="175" width="150" height="60" stroke="#00569E" fill="#F9FEFD"/>
+        <line x1="80" y1="175" x2="80" y2="160" stroke="#00569E"/>
+        <line x1="100" y1="175" x2="100" y2="160" stroke="#00569E"/>
+        <line x1="120" y1="175" x2="120" y2="160" stroke="#00569E"/>
+        <line x1="140" y1="175" x2="140" y2="160" stroke="#00569E"/>
+        <line x1="120" y1="160" x2="250" y2="90" stroke="#00569E" stroke-dasharray="4 4"/>
+        <rect x="250" y="50" width="200" height="120" stroke="#111827" fill="#F9FEFD"/>
+        <circle cx="350" cy="160" r="4" stroke="#111827"/>
+        <text x="262" y="74" fill="#00569E" stroke="none">CDU 025.4</text>
+        <line x1="262" y1="82" x2="438" y2="82" stroke="#111827"/>
+        <text x="262" y="102" fill="#111827" stroke="none">UN HECHO POR FICHA</text>
+        <text x="262" y="122" fill="#111827" stroke="none">FUENTE · PÁG.</text>
+        <text x="262" y="142" fill="#111827" stroke="none">VER TAMBIÉN: CDU 001</text>
+        <circle cx="430" cy="66" r="6" fill="#00B5F8" stroke="none"/>
+        <line x1="250" y1="190" x2="450" y2="190" stroke="#111827"/>
+        <line x1="250" y1="184" x2="250" y2="196" stroke="#111827"/>
+        <line x1="450" y1="184" x2="450" y2="196" stroke="#111827"/>
+        <text x="318" y="208" fill="#111827" stroke="none">3 × 5 in</text>
+        <rect x="270" y="260" width="170" height="100" stroke="#111827" fill="#F9FEFD"/>
+        <polyline points="270,260 355,315 440,260" stroke="#111827"/>
+        <text x="270" y="378" fill="#00569E" stroke="none">CONSULTA POR CORREO · 1896</text>
+        <path d="M270 310 C220 310 210 300 182 300" stroke="#00569E"/>
+        <polyline points="190,294 182,300 190,306" stroke="#00569E"/>
+        <text x="30" y="372" fill="#111827" stroke="none">&gt;50 FICHAS: ACOTE</text>
+        <text x="350" y="28" fill="#00569E" stroke="none">[ ILUSTRATIVO ]</text>
+      </svg>
+      <figcaption class="plate-cap" style="padding:0 12px 10px"><span>Fig. 1 — Fichero RBU</span><span>Esquema interpretativo</span></figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <article class="s">
+    <div class="wrap article">
+      <h2 class="ah">Un abogado que desconfiaba de los <em class="serif">libros</em></h2>
+      <p class="drop">Paul Otlet (Bruselas, 1868–1944) llegó a la bibliografía desde el derecho, y lo hizo con una sospecha incómoda: el libro es un mal contenedor de conocimiento. El autor decide a su manera el orden de los hechos, y ese orden los vuelve difíciles de encontrar después.</p>
+      <p>En 1895 fundó con Henri La Fontaine el Instituto Internacional de Bibliografía, y juntos empezaron el Répertoire bibliographique universel: un fichero de tarjetas estandarizadas de 3 × 5 pulgadas, ordenadas con un sistema propio que terminaría convirtiéndose en la Clasificación Decimal Universal. A finales de ese mismo año ya sumaban 400.000 entradas. En 1934, cuando el gobierno belga le cerró las puertas, pasaban de 15 millones.</p>
+
+      <h2 class="ah">El mostrador que respondía por <em class="serif">correo</em></h2>
+      <p>Lo que casi nadie recuerda es el servicio que había delante del fichero. Desde 1896 el instituto ofrecía consultas pagadas por correo o telégrafo: alguien enviaba una pregunta y el personal le devolvía copias de las fichas pertinentes. Para 1912 respondía más de 1.500 consultas al año, y avisaba al usuario cuando su pregunta iba a devolver más de 50 resultados. Varios historiadores de la información lo describen como un buscador analógico.</p>
+      <p>La lámina de arriba resume ese circuito. A la izquierda, el cajón del fichero; de él sale una ficha con su código de clase, un único hecho, la fuente con su página y una referencia cruzada a otra clase. Abajo, el sobre de la consulta que llega por correo, y la advertencia que el instituto ya daba entonces: si la respuesta pasa de 50 fichas, conviene acotar la pregunta.</p>
+
+      <h2 class="ah">Una hoja para cada <em class="serif">hecho</em></h2>
+      <p>Detrás del fichero había una regla de diseño que Otlet adoptó en 1908, el <i>principio monográfico</i>: separar lo que el libro amalgama, reducir lo complejo a sus elementos y dedicar una hoja a cada uno. La ficha no era un resumen del libro. Era una pieza suelta, con su procedencia, lista para combinarse con otras.</p>
+      <p>Todo eso quedó reunido en el <i>Traité de documentation</i> (1934), donde Otlet expuso la teoría y la proyectó hacia pantallas, escritorios giratorios para trabajar en varios proyectos a la vez y lectura a distancia.</p>
+
+      <blockquote class="pull">La unidad del conocimiento no es el documento, sino el hecho suelto con su procedencia. Todo lo demás es una manera de <em class="serif">ordenarlo</em>.</blockquote>
+
+      <h2 class="ah">Lo que la IA cambia y lo que se <em class="serif">perdió</em></h2>
+      <p>En Bruselas, decenas de documentalistas recortaban, copiaban y clasificaban cada hecho a mano. El cuello de botella era la atomización: convertir un libro en fichas costaba horas, y por eso el fichero nunca alcanzó el ritmo del mundo impreso. La consulta tardaba días en ir y volver por correo, pero llegaba como fichas, no como opinión.</p>
+      <p>Un modelo de lenguaje puede hacer hoy en segundos la parte que entonces era imposible: descomponer un texto largo en enunciados y conservar de dónde sale cada uno. La idea sigue viva de otras formas; herramientas como NotebookLM o <a href="https://lolodex.com">Lolodex</a> responden preguntas sobre documentos propios citando sus fuentes. Lo que se fue quedando por el camino es la forma de la respuesta, que en Bruselas era una pila de hechos sueltos y no un texto corrido.</p>
+
+      <h2 class="ah">Lo que nos <em class="serif">llevamos</em></h2>
+      <p>Otlet tenía la idea correcta y le faltaban manos. Su lección no está en el fichero sino en la disciplina que lo sostenía: decidir cuál es la unidad mínima de lo que uno maneja y no mezclarla con el orden en que se presenta. Quien separa el contenido de su disposición puede reorganizarlo para cada pregunta sin rehacerlo, y quien guarda la procedencia junto a cada pieza puede defenderla cuando alguien la discute.</p>
+      <p>La otra enseñanza es más modesta y quizá más difícil. El instituto avisaba cuando una pregunta iba a devolver demasiado, en vez de enterrar al usuario en papel. Cualquier sistema que entrega información, sea un buscador, un informe o un producto, se mide también por cómo ayuda a formular mejor la pregunta. Responder con menos y con piezas comprobables suele servir más que responder con todo.</p>
+
+      <div class="further">
+        <span class="label">// Para leer más</span>
+        <ul class="shelf" style="margin-top:12px">
+          <li><span class="n">A</span><span><b>Visions of Xanadu: Paul Otlet (1868–1944) and Hypertext</b> — W. Boyd Rayward (1994). El ensayo que sacó a Otlet del olvido y lo puso al lado de Bush y Nelson.</span></li>
+          <li><span class="n">B</span><span><b>Paper Machines: About Cards &amp; Catalogs, 1548–1929</b> — Markus Krajewski (MIT Press, 2011). La historia del fichero como máquina de procesar información, incluido el Puente de Múnich, de donde Otlet tomó el principio monográfico.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <section class="s" style="border-bottom:0">
+    <div class="wrap">
+      <span class="label">// Fuentes</span>
+      <ol class="sources" style="margin-top:16px">
+        <li><a href="https://en.wikipedia.org/wiki/Paul_Otlet">Paul Otlet — Wikipedia</a></li>
+        <li><a href="https://historyofinformation.com/detail.php?id=548">RBU — History of Information</a></li>
+        <li><a href="https://www.inlibra.com/document/download/pdf/uuid/e2639197-d4d6-3f63-848c-0dee301f01a8">Principio monográfico — Knowledge Organization (Van Acker)</a></li>
+        <li><a href="https://archive.org/details/OtletTraitDocumentationUgent">Traité de documentation — Internet Archive</a></li>
+        <li><a href="https://www.gutenberg.org/ebooks/74225">Création d'un répertoire bibliographique universel — Gutenberg</a></li>
+        <li><a href="https://Monoskop.org/images/f/f8/Rayward_W_Boyd_1998_Visions_of_Xanadu_Paul_Otlet_1968-1944_and_Hypertext.pdf">Rayward — Monoskop</a></li>
+        <li><a href="https://www.abd-bvd.be/wp-content/uploads/2012-2_Krajewski.pdf">Krajewski — ABD-BVD</a></li>
+        <li><a href="https://lolodex.com">Lolodex</a></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="motto">Want it. Analyze it. Build it<b>.</b></p>
+    <div class="meta"><span>Wantalyze · Lab Notes</span><span>Serie Biblioteca Vintage · 003</span><span>06.15°N · 75.37°W</span><span>© 2026</span></div>
+  </div>
+</footer>
+
+<svg class="grain" aria-hidden="true" width="100%" height="100%">
+  <filter id="w-noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#w-noise)" opacity="0.05"/>
+</svg>
+
+</body>
+</html>

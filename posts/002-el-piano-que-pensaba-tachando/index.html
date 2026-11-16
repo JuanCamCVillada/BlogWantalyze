@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El piano que pensaba tachando · Wantalyze</title>
+<meta property="og:image" content="miniatura.png">
+<meta property="og:title" content="El piano que pensaba tachando · Wantalyze">
+<meta name="description" content="En 1869 Jevons construyó una máquina que razonaba descartando. Su método, pensar quitando lo imposible, sigue diciendo mucho sobre cómo decidimos hoy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Silkscreen&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --w-paper:#F9FEFD;--w-base:#F9FAFB;--w-line:#E5E7EB;--w-ink:#111827;--w-deep:#00569E;
+  --w-signal:#00B5F8;--w-sky:#47C5FB;--w-glow:#62CFFE;--w-mist:#E0F1FF;
+  --w-grid-major:rgba(0,86,158,.10);--w-grid-minor:rgba(0,86,158,.05);
+  --w-font-sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,sans-serif;
+  --w-font-mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,monospace;
+  --w-font-serif:"New York",ui-serif,"Instrument Serif",Georgia,serif;
+  --w-font-pixel:"Silkscreen","VT323",monospace;
+  --w-font-jp:"Hiragino Sans","Noto Sans JP",sans-serif;
+  --w-ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--w-paper);color:var(--w-ink);font-family:var(--w-font-sans);-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.6}
+a{color:var(--w-deep);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--w-signal)}
+.label{font:500 11px/1.3 var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+.mono{font-family:var(--w-font-mono)}
+em.serif{font-family:var(--w-font-serif);font-style:italic;font-weight:400}
+/* NAV */
+.nav{position:sticky;top:0;z-index:10;background:var(--w-paper);border-bottom:1px solid var(--w-ink);display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 24px}
+.nav .brand{font:500 11px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+.nav .status{font:500 11px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);display:flex;gap:16px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--w-signal);margin-right:6px;vertical-align:1px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative}
+/* HERO */
+.hero{background:linear-gradient(var(--w-paper),var(--w-mist));border-bottom:1px solid var(--w-line);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;padding-top:64px;padding-bottom:64px;align-items:center}
+.hero h1{font-weight:900;font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-.035em;margin:16px 0 24px}
+.hero h1 em{font-size:1.05em;color:var(--w-deep)}
+.ficha{border-top:1.5px solid var(--w-ink);padding-top:12px;display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font:13px/1.45 var(--w-font-mono)}
+.ficha dt{color:var(--w-deep);text-transform:uppercase;letter-spacing:.1em;font-size:11px;padding-top:2px}
+.ficha dd{margin:0}
+.vertical{position:absolute;right:10px;top:84px;writing-mode:vertical-rl;font:500 11px var(--w-font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--w-deep)}
+.vertical .jp{font-family:var(--w-font-jp);letter-spacing:.3em}
+.plate{position:relative;background-color:var(--w-paper);border:1.5px solid var(--w-ink);
+  background-image:linear-gradient(var(--w-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-major) 1px,transparent 1px),linear-gradient(var(--w-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--w-grid-minor) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px,8px 8px,8px 8px;box-shadow:6px 6px 0 var(--w-deep)}
+.plate svg{display:block;width:100%;height:auto}
+.crop::before,.crop::after{content:"";position:absolute;width:18px;height:18px;border:0 solid var(--w-ink)}
+.crop::before{top:-10px;left:-10px;border-width:1px 0 0 1px}
+.crop::after{bottom:-10px;right:-10px;border-width:0 1px 1px 0}
+.plate-cap{display:flex;justify-content:space-between;margin-top:14px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-deep)}
+/* SECTIONS */
+section.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+.s-head{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.s-head h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0;font-weight:700}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.margin-note{font:500 11px/1.6 var(--w-font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--w-deep);border-left:1.5px solid var(--w-deep);padding-left:12px;align-self:start}
+.prose{max-width:68ch}
+.prose p{margin:0 0 1.1em}
+.drop::first-letter{font-family:var(--w-font-serif);font-size:3.6em;float:left;line-height:.85;padding:6px 10px 0 0;color:var(--w-deep)}
+.core{background:var(--w-mist);border:1.5px solid var(--w-ink);padding:36px 40px;position:relative}
+.core p{font-size:clamp(20px,2.6vw,27px);line-height:1.35;margin:0;letter-spacing:-.01em;max-width:34ch}
+.core .label{position:absolute;top:-10px;left:24px;background:var(--w-paper);padding:0 8px}
+/* windows */
+.win{background:var(--w-paper);border:2px solid var(--w-ink);border-radius:2px;box-shadow:6px 6px 0 var(--w-deep)}
+.win-bar{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-bottom:2px solid var(--w-ink)}
+.win-title{font:12px/1 var(--w-font-pixel);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.win-hatch{flex:1;height:12px;background:repeating-linear-gradient(to bottom,var(--w-ink) 0 2px,transparent 2px 4px)}
+.win-x{width:20px;height:20px;border:2px solid var(--w-ink);display:grid;place-items:center;font:13px/1 var(--w-font-mono)}
+.win-body{padding:20px}
+.win.inv .win-body{background:var(--w-ink);color:var(--w-paper)}
+.win.inv .win-body .label{color:var(--w-glow)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.duo h3,.flow h3{margin:8px 0 8px;font-size:22px;letter-spacing:-.01em}
+.duo p,.flow p{margin:0;font-size:16px}
+.log{font:14px/1.7 var(--w-font-mono)}
+.log .ok{color:var(--w-deep)}
+.log b{font-weight:500}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--w-ink)}
+.flow > div{padding:28px 24px;position:relative}
+.flow > div + div{border-left:1.5px solid var(--w-ink)}
+.flow .num{font:900 64px/1 var(--w-font-sans);letter-spacing:-.04em;color:var(--w-mist);-webkit-text-stroke:1.5px var(--w-deep)}
+.flow .icon{position:absolute;top:28px;right:24px}
+.flow .build{background:var(--w-base)}
+.chip{display:inline-block;border:1px solid var(--w-ink);border-radius:999px;padding:2px 10px;font:500 10px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;margin-top:14px}
+/* mesh + shelf */
+.mesh-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.shelf{list-style:none;padding:0;margin:0}
+.shelf li{border-top:1px solid var(--w-line);padding:16px 0;display:grid;grid-template-columns:48px 1fr;gap:12px}
+.shelf li:last-child{border-bottom:1px solid var(--w-line)}
+.shelf .n{font:500 12px var(--w-font-mono);color:var(--w-deep)}
+.shelf b{font-weight:600}
+.sources{font:13px/1.8 var(--w-font-mono);columns:2;column-gap:40px;padding-left:18px;margin:0}
+/* footer */
+footer{background:var(--w-ink);color:var(--w-paper);padding:56px 0 40px}
+footer .motto{font:500 13px var(--w-font-mono);letter-spacing:.14em;text-transform:uppercase}
+footer .motto b{color:var(--w-signal);font-weight:500}
+footer .meta{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;margin-top:32px;font:500 11px var(--w-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--w-glow)}
+.seg{display:flex;gap:3px;margin-top:20px}
+.seg i{width:14px;height:8px;border:1px solid var(--w-glow)}
+.seg i.on{background:var(--w-glow)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50}
+@keyframes orbit{to{transform:rotate(360deg)}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}}
+@media (max-width:820px){
+  .hero .wrap,.duo,.mesh-grid,.cols{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow > div + div{border-left:0;border-top:1.5px solid var(--w-ink)}
+  .vertical{display:none}
+  .nav .status span.hide{display:none}
+  .sources{columns:1}
+  .core{padding:28px 22px}
+}
+
+.dek{font-size:20px;line-height:1.45;max-width:34ch;margin:0 0 20px;color:var(--w-ink)}
+.byline{font:500 12px var(--w-font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--w-deep);border-top:1.5px solid var(--w-ink);padding-top:12px;margin:0}
+.article{max-width:760px}
+.article p{margin:0 0 1.15em;max-width:68ch}
+.ah{font-size:clamp(26px,3.4vw,34px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:56px 0 18px}
+.ah:first-child{margin-top:0}
+.pull{margin:48px 0;padding:28px 32px;background:var(--w-mist);border:1.5px solid var(--w-ink);font-size:clamp(20px,2.6vw,26px);line-height:1.35;letter-spacing:-.01em}
+.article .flow p{font-size:16px;margin:0}
+.further{margin-top:56px}
+article.s{padding:72px 0;border-bottom:1px solid var(--w-line)}
+@media (max-width:820px){.pull{padding:22px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span class="brand">Wantalyze // Lab Notes</span>
+  <span class="status"><span><span class="dot"></span>Blog</span><span class="hide">06.15°N · 75.37°W</span><span class="hide">16.11.2026</span></span>
+</nav>
+
+<header class="hero">
+  <div class="vertical"><span class="jp">記録</span> · Serie Biblioteca Vintage · 002</div>
+  <div class="wrap">
+    <div>
+      <span class="label">[ LAB NOTES ] // IA antigua</span>
+      <h1>El piano que pensaba <em class="serif">tachando</em>.</h1>
+      <p class="dek">En 1869 un economista inglés construyó una máquina que razonaba descartando. Su método no buscaba la respuesta: mostraba todo lo que aún podía ser cierto.</p>
+      <p class="byline">Por Juan Villada · Wantalyze · 16.11.2026 · ≈ 3 min</p>
+    </div>
+    <figure class="plate crop" style="margin:0" aria-label="Lámina: el piano lógico de Jevons. Un teclado de 21 teclas mueve varillas que tachan, en un tablero de 16 combinaciones de A, B, C y D, las que contradicen dos premisas. Quedan 8 combinaciones y de ellas se lee la conclusión: todo A es C.">
+      <svg viewBox="0 0 560 420" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+        <!-- premises panel -->
+        <g transform="translate(32 40)">
+          <rect x="0" y="0" width="242" height="164" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/>
+          <text x="12" y="20" font-size="10" fill="#00569E" letter-spacing="1.2">PREMISAS // NOTACIÓN JEVONS</text>
+          <line x1="12" y1="30" x2="230" y2="30" stroke="#E5E7EB"/>
+          <line x1="12" y1="50" x2="34" y2="50" stroke="#111827" stroke-width="1.25"/>
+          <text x="42" y="54" font-size="12" fill="#111827">P1 · A = AB</text>
+          <text x="42" y="68" font-size="8.5" fill="#00569E">todo A es B</text>
+          <line x1="12" y1="88" x2="34" y2="88" stroke="#00569E" stroke-width="1.25" stroke-dasharray="3 2"/>
+          <text x="42" y="92" font-size="12" fill="#111827">P2 · B = BC</text>
+          <text x="42" y="106" font-size="8.5" fill="#00569E">todo B es C</text>
+          <line x1="12" y1="122" x2="230" y2="122" stroke="#111827" stroke-width="1"/>
+          <text x="12" y="144" font-size="13" fill="#111827" font-family="Georgia, serif" font-style="italic">∴ A = AC</text>
+          <circle cx="104" cy="140" r="4.5" fill="#00B5F8" stroke="#111827" stroke-width="1"/>
+          <text x="116" y="143" font-size="8" fill="#111827">se LEE en el tablero</text>
+          <text x="12" y="158" font-size="7.5" fill="#00569E">minúscula = negación (a = no-A)</text>
+        </g>
+        <!-- board -->
+        <text x="300" y="40" font-size="10" fill="#00569E" letter-spacing="1.2">ALFABETO LÓGICO · 2⁴ = 16</text>
+        <rect x="300" y="52" width="58" height="30" fill="#E0F1FF" stroke="#111827" stroke-width="1.5"/><text x="329.0" y="71" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">ABCD</text>
+<rect x="364" y="52" width="58" height="30" fill="#E0F1FF" stroke="#111827" stroke-width="1.5"/><text x="393.0" y="71" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">ABCd</text>
+<rect x="428" y="52" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="457.0" y="71" text-anchor="middle" font-size="11" fill="#9CA3AF">ABcD</text><line x1="434" y1="76" x2="480" y2="58" stroke="#00569E" stroke-width="1.25" stroke-dasharray="3 2"/>
+<rect x="492" y="52" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="521.0" y="71" text-anchor="middle" font-size="11" fill="#9CA3AF">ABcd</text><line x1="498" y1="76" x2="544" y2="58" stroke="#00569E" stroke-width="1.25" stroke-dasharray="3 2"/>
+<rect x="300" y="90" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="329.0" y="109" text-anchor="middle" font-size="11" fill="#9CA3AF">AbCD</text><line x1="306" y1="114" x2="352" y2="96" stroke="#111827" stroke-width="1.25"/>
+<rect x="364" y="90" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="393.0" y="109" text-anchor="middle" font-size="11" fill="#9CA3AF">AbCd</text><line x1="370" y1="114" x2="416" y2="96" stroke="#111827" stroke-width="1.25"/>
+<rect x="428" y="90" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="457.0" y="109" text-anchor="middle" font-size="11" fill="#9CA3AF">AbcD</text><line x1="434" y1="114" x2="480" y2="96" stroke="#111827" stroke-width="1.25"/>
+<rect x="492" y="90" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="521.0" y="109" text-anchor="middle" font-size="11" fill="#9CA3AF">Abcd</text><line x1="498" y1="114" x2="544" y2="96" stroke="#111827" stroke-width="1.25"/>
+<rect x="300" y="128" width="58" height="30" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="329.0" y="147" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">aBCD</text>
+<rect x="364" y="128" width="58" height="30" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="393.0" y="147" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">aBCd</text>
+<rect x="428" y="128" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="457.0" y="147" text-anchor="middle" font-size="11" fill="#9CA3AF">aBcD</text><line x1="434" y1="152" x2="480" y2="134" stroke="#00569E" stroke-width="1.25" stroke-dasharray="3 2"/>
+<rect x="492" y="128" width="58" height="30" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/><text x="521.0" y="147" text-anchor="middle" font-size="11" fill="#9CA3AF">aBcd</text><line x1="498" y1="152" x2="544" y2="134" stroke="#00569E" stroke-width="1.25" stroke-dasharray="3 2"/>
+<rect x="300" y="166" width="58" height="30" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="329.0" y="185" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">abCD</text>
+<rect x="364" y="166" width="58" height="30" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="393.0" y="185" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">abCd</text>
+<rect x="428" y="166" width="58" height="30" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="457.0" y="185" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">abcD</text>
+<rect x="492" y="166" width="58" height="30" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="521.0" y="185" text-anchor="middle" font-size="11" font-weight="500" fill="#111827">abcd</text>
+        <text x="300" y="218" font-size="8.5" fill="#111827">16 − 4 (P1) − 4 (P2) = 8 mundos posibles</text>
+        <text x="300" y="232" font-size="8" fill="#00569E">sombreado = filas con A: todas contienen C</text>
+        <!-- rods & pulleys -->
+        <g stroke="#00569E" stroke-width="1" fill="none">
+          <path d="M120 318 V268 H330 V236" stroke-dasharray="4 3"/>
+          <path d="M300 318 V280 H520 V236" stroke-dasharray="4 3"/>
+          <circle cx="120" cy="268" r="6"/><circle cx="300" cy="280" r="6"/>
+          <circle cx="330" cy="268" r="3"/><circle cx="520" cy="280" r="3"/>
+        </g>
+        <text x="140" y="262" font-size="8" fill="#00569E">VARILLAS Y POLEAS (OCULTAS)</text>
+        <!-- keyboard -->
+        <g shape-rendering="crispEdges">
+        <rect x="40" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="51.0" y="366" text-anchor="middle" font-size="10" fill="#111827">A</text>
+<rect x="63" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="74.0" y="366" text-anchor="middle" font-size="10" fill="#111827">a</text>
+<rect x="86" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="97.0" y="366" text-anchor="middle" font-size="10" fill="#111827">B</text>
+<rect x="109" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="120.0" y="366" text-anchor="middle" font-size="10" fill="#111827">b</text>
+<rect x="132" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="143.0" y="366" text-anchor="middle" font-size="10" fill="#111827">C</text>
+<rect x="155" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="166.0" y="366" text-anchor="middle" font-size="10" fill="#111827">c</text>
+<rect x="178" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="189.0" y="366" text-anchor="middle" font-size="10" fill="#111827">D</text>
+<rect x="201" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="212.0" y="366" text-anchor="middle" font-size="10" fill="#111827">d</text>
+<rect x="224" y="318" width="22" height="58" fill="#111827" stroke="#111827" stroke-width="1.5"/><text x="235.0" y="366" text-anchor="middle" font-size="10" fill="#F9FEFD">=</text>
+<rect x="247" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="258.0" y="366" text-anchor="middle" font-size="10" fill="#111827">A</text>
+<rect x="270" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="281.0" y="366" text-anchor="middle" font-size="10" fill="#111827">a</text>
+<rect x="293" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="304.0" y="366" text-anchor="middle" font-size="10" fill="#111827">B</text>
+<rect x="316" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="327.0" y="366" text-anchor="middle" font-size="10" fill="#111827">b</text>
+<rect x="339" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="350.0" y="366" text-anchor="middle" font-size="10" fill="#111827">C</text>
+<rect x="362" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="373.0" y="366" text-anchor="middle" font-size="10" fill="#111827">c</text>
+<rect x="385" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="396.0" y="366" text-anchor="middle" font-size="10" fill="#111827">D</text>
+<rect x="408" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="419.0" y="366" text-anchor="middle" font-size="10" fill="#111827">d</text>
+<rect x="431" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="442.0" y="366" text-anchor="middle" font-size="10" fill="#111827">∨</text>
+<rect x="454" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="465.0" y="366" text-anchor="middle" font-size="10" fill="#111827">∨</text>
+<rect x="477" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="488.0" y="366" text-anchor="middle" font-size="10" fill="#111827">.</text>
+<rect x="500" y="318" width="22" height="58" fill="#F9FEFD" stroke="#111827" stroke-width="1.5"/><text x="511.0" y="366" text-anchor="middle" font-size="8" fill="#111827">FIN</text>
+        </g>
+        <text x="40" y="310" font-size="8" fill="#111827">SUJETO</text>
+        <text x="235" y="299" text-anchor="middle" font-size="8" fill="#111827">CÓPULA</text>
+        <text x="252" y="310" font-size="8" fill="#111827">PREDICADO</text>
+        <text x="458" y="310" font-size="8" fill="#111827">O · STOP</text>
+        <!-- dimension line -->
+        <g stroke="#00569E" stroke-width="1">
+          <line x1="40" y1="392" x2="523" y2="392"/><line x1="40" y1="387" x2="40" y2="397"/><line x1="523" y1="387" x2="523" y2="397"/>
+        </g>
+        <text x="40" y="410" font-size="9" fill="#00569E">21 TECLAS · DISTRIBUCIÓN ILUSTRATIVA · LÁMINA 002-A</text>
+        <g stroke="#111827" stroke-width="1" fill="none"><circle cx="536" cy="24" r="9"/><line x1="522" y1="24" x2="550" y2="24"/><line x1="536" y1="10" x2="536" y2="38"/></g>
+      </svg>
+      <figcaption class="plate-cap" style="padding:0 12px 10px"><span>Fig. 1 — Piano lógico, esquema</span><span>Reconstrucción interpretativa</span></figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <article class="s">
+    <div class="wrap article">
+      <h2 class="ah">Un economista con una <em class="serif">obsesión</em></h2>
+      <p class="drop">William Stanley Jevons (1835–1882) es recordado como economista, uno de los padres de la teoría de la utilidad marginal. Pero en paralelo llevaba otra obsesión: volver mecánico el razonamiento. Tomó el álgebra lógica de George Boole, la simplificó con un principio propio al que llamó «sustitución de similares» y lo publicó en <i>Pure Logic</i> (1864), un libro que casi nadie compró.</p>
+
+      <h2 class="ah">Pensar también es <em class="serif">quitar</em></h2>
+      <p>El método de Jevons no deducía hacia adelante: descartaba. Con cuatro términos, A, B, C y D, y sus negaciones, que escribía en minúscula, listaba todas las combinaciones posibles. Son dieciséis, y las llamó el «alfabeto lógico». Cada premisa tachaba las combinaciones que la contradicen. Lo que sobrevivía era la respuesta.</p>
+      <p>La lámina de arriba lo muestra con el silogismo de toda la vida. Si todo A es B, desaparecen las cuatro combinaciones que tienen A sin B. Si todo B es C, desaparecen otras cuatro, las que tienen B sin C. Quedan ocho. Basta mirar las que contienen A para leer la conclusión: todas tienen C. Nadie la dedujo paso a paso; quedó a la vista cuando se fue lo imposible.</p>
+      <p>Primero lo hizo con tiza en una pizarra y después con tablillas de madera en una especie de ábaco lógico. Pero quería algo más.</p>
+
+      <h2 class="ah">Una caja de 21 <em class="serif">teclas</em></h2>
+      <p>En 1869, con un relojero de Salford al que nunca nombró y al que visitaba casi a diario para revisar el trabajo, construyó la versión definitiva: una caja de madera con 21 teclas que parecían de piano. La premisa se tecleaba como una frase, con sujeto, cópula y predicado. Al pulsar la tecla del punto final, un sistema oculto de varillas y poleas retiraba del tablero las combinaciones imposibles. Una tecla «finis» devolvía todo a cero.</p>
+      <p>Jevons lo presentó ante la Royal Society, y su artículo «On the Mechanical Performance of Logical Inference» salió en las <i>Philosophical Transactions</i> de 1870. El piano se conserva hoy en el History of Science Museum de Oxford. Muchos historiadores lo consideran la primera máquina que resolvía problemas lógicos más rápido que una persona con lápiz.</p>
+
+      <blockquote class="pull">Lo valioso del piano no era la respuesta. Era el tablero: ver <em class="serif">todo</em> lo que todavía puede pasar.</blockquote>
+
+      <h2 class="ah">Lo que el piano sabía y los chats <em class="serif">olvidaron</em></h2>
+      <p>La máquina de Jevons tenía dos límites claros: había que hablarle en lógica formal y con cuatro términos se quedaba corta. Un modelo de lenguaje no tiene ninguno de los dos. Entiende frases corrientes y puede convertirlas en reglas sin que nadie aprenda notación.</p>
+      <p>Pero tiene el defecto contrario. Responde con una sola historia coherente y deja en la sombra los casos que nadie definió. Si nadie los preguntó, los resuelve como le parece y sigue adelante. El piano, en cambio, dejaba cada posibilidad abierta encendida en el tablero, a la vista de todos.</p>
+      <p>Lo que la IA hace posible hoy es juntar ambas mitades: la soltura con el lenguaje que Jevons no tenía y la disciplina de mostrar el espacio completo que su máquina sí tenía.</p>
+
+      <h2 class="ah">Lo que nos <em class="serif">llevamos</em></h2>
+      <p>La lección del piano es que una buena herramienta de pensamiento no solo entrega conclusiones: enseña el terreno que todavía queda abierto. Cuando un sistema muestra únicamente su mejor respuesta, esconde las alternativas que descartó y las que nunca consideró. Cuando muestra lo que sobrevive, invita a preguntar por qué sigue ahí.</p>
+      <p>Para quien diseña software o productos, eso se traduce en un hábito sencillo: tratar lo no decidido como un dato visible, no como un vacío que alguien llenará después. Jevons quería que una máquina razonara por nosotros. Su mejor legado quizá sea más modesto: recordarnos que pensar bien también es ver con claridad lo que todavía no hemos decidido.</p>
+
+      <div class="further">
+        <span class="label">// Para leer más</span>
+        <ul class="shelf" style="margin-top:12px">
+          <li><span class="n">A</span><span><b>Logic Machines and Diagrams</b> — Martin Gardner (1958). Un recorrido por las máquinas lógicas, con un capítulo para Jevons.</span></li>
+          <li><span class="n">B</span><span><b>The Principles of Science</b> — W. S. Jevons (1874). Donde explica el piano y su método por eliminación para un público amplio.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <section class="s" style="border-bottom:0">
+    <div class="wrap">
+      <span class="label">// Fuentes</span>
+      <ol class="sources" style="margin-top:16px">
+        <li><a href="https://computerhistory.org/blog/logical-piano-lessons/">Logical Piano Lessons — CHM</a></li>
+        <li><a href="https://rutherfordjournal.org/article010103.html">Jevons and the Logic «Piano» — Rutherford Journal</a></li>
+        <li><a href="https://historyofinformation.com/detail.php?id=496">Jevons' logic machine — HistoryofInformation</a></li>
+        <li><a href="https://www.mhs.ox.ac.uk/home-made-logic-machines">History of Science Museum, Oxford</a></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="motto">Want it. Analyze it. Build it<b>.</b></p>
+    <div class="meta"><span>Wantalyze · Lab Notes</span><span>Serie Biblioteca Vintage · 002</span><span>06.15°N · 75.37°W</span><span>© 2026</span></div>
+  </div>
+</footer>
+
+<svg class="grain" aria-hidden="true" width="100%" height="100%">
+  <filter id="w-noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#w-noise)" opacity="0.05"/>
+</svg>
+
+</body>
+</html>
