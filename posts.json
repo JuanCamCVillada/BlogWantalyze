@@ -1,5 +1,13 @@
 [
   {
+    "numero": "009",
+    "titulo": "Valores sin escala",
+    "slug": "valores-sin-escala",
+    "ruta": "posts/009-valores-sin-escala/",
+    "miniatura": "posts/009-valores-sin-escala/miniatura.png",
+    "fecha": "2026-11-17"
+  },
+  {
     "numero": "008",
     "titulo": "La máquina que escribe casas",
     "slug": "la-maquina-que-escribe-casas",
