@@ -1,5 +1,13 @@
 [
   {
+    "numero": "010",
+    "titulo": "Jugar solo el final",
+    "slug": "jugar-solo-el-final",
+    "ruta": "posts/010-jugar-solo-el-final/",
+    "miniatura": "posts/010-jugar-solo-el-final/miniatura.png",
+    "fecha": "2026-11-18"
+  },
+  {
     "numero": "009",
     "titulo": "Valores sin escala",
     "slug": "valores-sin-escala",
