@@ -1,5 +1,13 @@
 [
   {
+    "numero": "011",
+    "titulo": "Buscar con luz",
+    "slug": "buscar-con-luz",
+    "ruta": "posts/011-buscar-con-luz/",
+    "miniatura": "posts/011-buscar-con-luz/miniatura.png",
+    "fecha": "2026-11-19"
+  },
+  {
     "numero": "010",
     "titulo": "Jugar solo el final",
     "slug": "jugar-solo-el-final",
