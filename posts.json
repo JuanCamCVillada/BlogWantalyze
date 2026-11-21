@@ -1,5 +1,13 @@
 [
   {
+    "numero": "013",
+    "titulo": "Equivocarse hasta el equilibrio",
+    "slug": "equivocarse-hasta-el-equilibrio",
+    "ruta": "posts/013-equivocarse-hasta-el-equilibrio/",
+    "miniatura": "posts/013-equivocarse-hasta-el-equilibrio/miniatura.png",
+    "fecha": "2026-11-21"
+  },
+  {
     "numero": "012",
     "titulo": "El mundo de la garrapata",
     "slug": "el-mundo-de-la-garrapata",

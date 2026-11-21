@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Equivocarse hasta el equilibrio · Wantalyze</title>
+<meta name="description" content="El homeostato de W. Ross Ashby (1948): una máquina que se adaptaba probando configuraciones al azar, y lo que enseña hoy a quien diseña software.">
+<meta property="og:title" content="Equivocarse hasta el equilibrio">
+<meta property="og:description" content="El homeostato de W. Ross Ashby (1948): una máquina que se adaptaba probando configuraciones al azar, y lo que enseña hoy a quien diseña software.">
+<meta property="og:image" content="miniatura.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Instrument+Serif:ital@1&family=JetBrains+Mono&display=swap">
+<style>:root{--p:#F9FEFD;--l:#E5E7EB;--i:#111827;--d:#00569E;--s:#00B5F8;--g:#62CFFE;--m:#E0F1FF;--e:cubic-bezier(.2,.8,.2,1);--sans:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;--mono:ui-monospace,"JetBrains Mono",Menlo,monospace;--serif:"Instrument Serif",Georgia,serif}*{box-sizing:border-box}body{margin:0;background:var(--p);color:var(--i);font:17px/1.6 var(--sans)}a{color:var(--d)}.lb{font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--d)}em{font-family:var(--serif);font-weight:400;color:var(--d)}nav{position:sticky;top:0;z-index:9;background:var(--p);border-bottom:1px solid var(--i);display:flex;justify-content:space-between;padding:10px 24px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--s);margin-right:6px}.w{max-width:1080px;margin:0 auto;padding:0 24px}.hero{background:linear-gradient(var(--p),var(--m))}.hero .w{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:56px 24px;align-items:center}h1{font-weight:900;font-size:clamp(42px,7vw,80px);line-height:.95;letter-spacing:-.035em;margin:14px 0 22px}.fi{border-top:1.5px solid var(--i);padding-top:10px;font:13px/1.6 var(--mono)}.pl{margin:0;border:1.5px solid var(--i);box-shadow:6px 6px 0 var(--d);background:var(--p) repeating-linear-gradient(0deg,rgba(0,86,158,.1) 0 1px,transparent 1px 64px),repeating-linear-gradient(90deg,rgba(0,86,158,.1) 0 1px,transparent 1px 64px)}.pl svg{display:block;width:100%;height:auto}section{padding:56px 0;border-top:1px solid var(--l)}.c{display:grid;grid-template-columns:180px 1fr;gap:40px}.pr{max-width:68ch}h2{font-size:clamp(26px,4vw,36px);letter-spacing:-.02em;margin:0 0 20px}.core{background:var(--m);border:1.5px solid var(--i);padding:28px 32px;font-size:clamp(20px,2.6vw,25px);line-height:1.35}.win{border:2px solid var(--i);box-shadow:6px 6px 0 var(--d);transition:transform .2s var(--e),box-shadow .2s var(--e)}.win:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--d)}.bar{display:flex;gap:8px;align-items:center;height:28px;padding:0 8px;border-bottom:2px solid var(--i);font:12px var(--mono);text-transform:uppercase}.bar i{flex:1;height:12px;background:repeating-linear-gradient(var(--i) 0 2px,transparent 2px 4px)}.bd{padding:20px}.inv .bd{background:var(--i);color:var(--p)}.duo,.fl{display:grid;gap:24px}.duo{grid-template-columns:1fr 1fr}.fl{grid-template-columns:repeat(3,1fr)}.fl>div{border:1.5px solid var(--i);padding:22px}.n{font:900 52px/1 var(--sans);color:var(--m);-webkit-text-stroke:1.5px var(--d)}.log{font:14px/1.7 var(--mono)}footer{background:var(--i);color:var(--p);padding:40px 0;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase}footer b{color:var(--s)}@keyframes up{from{opacity:0;transform:translateY(16px)}}@keyframes dr{to{stroke-dashoffset:0}}@keyframes fd{from{opacity:0}}@keyframes pu{50%{transform:scale(1.7);opacity:.45}}.hero .lb,h1,.fi{animation:up .8s var(--e) both}h1{animation-delay:.12s}.fi{animation-delay:.24s}.pl{animation:fd .6s .2s both}.pl svg :is(path,line,circle,rect,polyline,ellipse):not([stroke-dasharray]){stroke-dasharray:1200;stroke-dashoffset:1200;animation:dr 2.6s .3s var(--e) forwards}.pl svg text{animation:fd .6s 1.6s both}.sp,.dot{transform-box:fill-box;transform-origin:center;animation:pu 2.4s 2.8s ease-in-out infinite}.dot{animation-delay:0s}@supports(animation-timeline:view()){section>.w{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 40%}.g :is(line,path){stroke-dasharray:400;stroke-dashoffset:400;animation:dr linear both;animation-timeline:view();animation-range:entry 10% cover 40%}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}@media(max-width:820px){.hero .w,.duo,.c,.fl{grid-template-columns:1fr}}.dek{font-size:20px;line-height:1.45;max-width:34ch;margin:0 0 20px}.ar{max-width:760px}.ar p{max-width:68ch}.ar h2{margin-top:48px}.ar h3{font-size:20px;margin:28px 0 8px}.pull{margin:40px 0;padding:24px 28px;background:var(--m);border:1.5px solid var(--i);font-size:clamp(20px,2.6vw,25px);line-height:1.35}.tldr{margin:0 0 40px;padding:20px 24px;border-left:3px solid var(--d);background:var(--m);font-size:18px}.faq{margin-top:56px;border-top:1.5px solid var(--i);padding-top:8px}</style>
+</head>
+<body>
+<nav><span class="lb">WANTALYZE // LAB NOTES</span><span class="lb"><b class=dot></b>BLOG · 06.15°N 75.37°W</span></nav>
+<header class="hero"><div class="w">
+<div>
+<p class="lb">[ LAB NOTES ] // cibernética y sistemas</p>
+<h1>Equivocarse hasta el <em>equilibrio</em></h1>
+<p class="dek">En 1948, un psiquiatra inglés construyó una máquina que se adaptaba probando al azar. Su secreto no era la inteligencia, sino saber cuándo estaba mal.</p>
+</div>
+<figure class="pl"><svg role="img" aria-label="Lámina ilustrativa del homeostato de Ashby: cuatro unidades acopladas con imán, aguja y artesa; una aguja fuera de su zona viable y un uniselector que salta a una nueva configuración." viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,JetBrains Mono,Menlo,monospace" font-size="10" fill="none">
+<text x="40" y="16" fill="#111827" stroke="none">HOMEOSTATO // 4 UNIDADES ACOPLADAS // 1948</text>
+<path d="M40 26 H440 M40 21 V31 M440 21 V31" stroke="#111827" stroke-width="1"/>
+<path d="M200 95 H280 M200 265 H280 M120 150 V210 M360 150 V210 M200 150 L280 210 M280 150 L200 210" stroke="#00569E" stroke-width="1.2"/>
+<g transform="translate(40,40)"><rect width="160" height="110" stroke="#111827" stroke-width="1.5"/><path d="M35 70 A45 45 0 0 1 125 70" stroke="#00569E" stroke-width="3"/><line x1="80" y1="95" x2="40" y2="48" stroke="#111827" stroke-width="2"/><circle cx="80" cy="95" r="4" stroke="#111827" stroke-width="1.5"/><text x="8" y="104" fill="#00569E" stroke="none">U1 FUERA DE ZONA</text></g>
+<g transform="translate(280,40)"><rect width="160" height="110" stroke="#111827" stroke-width="1.5"/><path d="M35 70 A45 45 0 0 1 125 70" stroke="#00569E" stroke-width="3"/><line x1="80" y1="95" x2="84" y2="35" stroke="#111827" stroke-width="2"/><circle cx="80" cy="95" r="4" stroke="#111827" stroke-width="1.5"/><line x1="80" y1="95" x2="58" y2="22" stroke="#00569E" stroke-dasharray="3 3"/><line x1="80" y1="95" x2="102" y2="22" stroke="#00569E" stroke-dasharray="3 3"/><text x="8" y="104" fill="#00569E" stroke="none">U2 ZONA VIABLE</text></g>
+<g transform="translate(40,210)"><rect width="160" height="110" stroke="#111827" stroke-width="1.5"/><path d="M35 70 A45 45 0 0 1 125 70" stroke="#00569E" stroke-width="3"/><line x1="80" y1="95" x2="92" y2="36" stroke="#111827" stroke-width="2"/><circle cx="80" cy="95" r="4" stroke="#111827" stroke-width="1.5"/><text x="8" y="104" fill="#00569E" stroke="none">U3 IMÁN + ARTESA</text></g>
+<g transform="translate(280,210)"><rect width="160" height="110" stroke="#111827" stroke-width="1.5"/><path d="M35 70 A45 45 0 0 1 125 70" stroke="#00569E" stroke-width="3"/><line x1="80" y1="95" x2="70" y2="36" stroke="#111827" stroke-width="2"/><circle cx="80" cy="95" r="4" stroke="#111827" stroke-width="1.5"/><text x="8" y="104" fill="#00569E" stroke="none">U4 IMÁN + ARTESA</text></g>
+<circle cx="120" cy="365" r="18" stroke="#111827" stroke-width="1.5"/>
+<polyline points="104,365 108,353 116,348 126,348 134,353 138,365" stroke="#00569E" stroke-width="1.5"/>
+<path d="M120 320 V347" stroke="#111827" stroke-width="1"/>
+<circle class="sp" cx="134" cy="353" r="4" fill="#00B5F8" stroke="#00B5F8"/>
+<text x="150" y="362" fill="#111827" stroke="none">UNISELECTOR: SALTO AL AZAR</text>
+<text x="150" y="376" fill="#00569E" stroke="none">SOLO SI LA AGUJA SALE DE ZONA</text>
+<text x="380" y="392" fill="#00569E" stroke="none">ILUSTRATIVO</text>
+</svg></figure>
+</div></header>
+<section><div class="w ar">
+<p class="tldr"><strong>En esta nota:</strong> El homeostato fue una máquina construida por el psiquiatra británico W. Ross Ashby y terminada el 16 de marzo de 1948. Mostraba la ultraestabilidad: un sistema que, cuando una variable vital sale de sus límites, cambia sus propias reglas hasta recuperar el equilibrio. La lección para quien construye software es definir primero qué no se puede perder y después cómo reaccionar.</p>
+
+<h2>Cuatro <em>agujas</em> buscando calma</h2>
+<p>A finales de los años cuarenta, William Ross Ashby trabajaba como psiquiatra y director de investigación en Barnwood House, un hospital de Gloucester, en Inglaterra. Llevaba años anotando en cuadernos privados una pregunta que parecía de filosofía: cómo es posible que un cerebro, hecho de piezas que no entienden nada, aprenda a comportarse bien.</p>
+<p>Su respuesta fue una máquina. Con unidades sobrantes de la Real Fuerza Aérea armó cuatro módulos idénticos, cada uno con un imán suspendido, una aguja y una paleta metálica sumergida en una artesa con agua. La corriente que salía de cada módulo movía a los otros tres y también a sí mismo, de modo que nada se podía mover sin afectar a todo lo demás.</p>
+<p>La pieza decisiva era un interruptor de pasos llamado uniselector. Mientras las agujas se mantenían dentro de su rango, no ocurría nada especial. Cuando una se salía, el uniselector saltaba a otra combinación de conexiones, elegida prácticamente al azar. Si la máquina seguía inestable, saltaba otra vez. Cuando las cuatro agujas quedaban quietas, el salto se detenía.</p>
+<p>La prensa la llamó cerebro artificial; la revista Time le dedicó una nota en enero de 1949 y Alan Turing le escribió a Ashby proponiendo simularla en su computador ACE. Norbert Wiener la consideró una de las grandes contribuciones filosóficas de su tiempo. Ashby la presentó en la novena conferencia Macy de cibernética, en 1952, el mismo año en que publicó el libro <i>Design for a Brain</i>.</p>
+<p>En aquella conferencia le hicieron una crítica certera: la máquina no recordaba. Cada vez que se perturbaba, buscaba como si fuera la primera vez, sin aprovechar las configuraciones que ya habían funcionado antes.</p>
+
+<h2>Lo que muestra la <em>lámina</em></h2>
+<p>La ilustración resume el mecanismo. Arriba a la izquierda, una unidad tiene la aguja fuera de su zona viable; a la derecha, otra unidad marca con líneas punteadas los límites dentro de los cuales todo está bien. Las líneas que cruzan el centro son los acoplamientos: cada unidad influye en las demás. Abajo, el uniselector, el componente que solo actúa cuando algo se sale de los límites. Es un dibujo ilustrativo, no un plano técnico de la máquina original.</p>
+
+<div class="pull">Un sistema no necesita entender su entorno para adaptarse: necesita saber qué variables no puede perder y tener un repertorio de cambios para probar cuando las pierde.</div>
+
+<h2>Dos bucles, dos <em>velocidades</em></h2>
+<p>Ashby distinguió dos niveles. El primero es el ajuste rápido y continuo, como un termostato que corrige la temperatura. El segundo es lento y discreto: no corrige valores, cambia las reglas del primero. Solo se activa cuando el bucle rápido ya no consigue mantener a salvo las variables esenciales.</p>
+<p>Esta idea reaparece en el diseño de sistemas de inteligencia artificial. Un modelo de lenguaje dentro de un producto se comporta como el bucle rápido: responde, corrige, se acomoda a cada conversación. Lo que muchas veces falta es el segundo bucle, un nivel que observe si el sistema sigue cumpliendo lo que importa y que cambie la configuración, de forma controlada y trazable, cuando deja de hacerlo.</p>
+
+<h2>¿Qué fue el homeostato de W. Ross Ashby?</h2>
+<p>El homeostato fue una máquina electromecánica construida por W. Ross Ashby y completada el 16 de marzo de 1948 en Barnwood House, Inglaterra. Estaba formada por cuatro unidades interconectadas que se influían entre sí y buscaba por sí sola una configuración estable cuando se la perturbaba.</p>
+<p>Su importancia está en que demostró la ultraestabilidad: la capacidad de un sistema de reorganizarse, probando alternativas, cuando una de sus variables vitales sale de los límites aceptables. Ashby la describió en detalle en <i>Design for a Brain</i> (1952), y la idea influyó en la cibernética, la robótica adaptativa y la teoría de sistemas.</p>
+
+<h2>¿Cómo se diseña un software que se adapte cuando cambian las condiciones?</h2>
+<p>Un buen punto de partida es definir, antes de escribir código, cuáles son las pocas métricas que el sistema no puede perder, con límites claros: tiempos de respuesta, tasas de error, la proporción de casos resueltos sin intervención humana o lo que el negocio considere vital. Sin esa definición, cualquier ajuste posterior es intuición.</p>
+<p>Después conviene separar los ajustes rápidos y automáticos de los cambios de configuración de mayor alcance. Estos últimos deberían elegirse de un repertorio conocido y aprobado, quedar registrados y poder revertirse. Así el sistema se adapta sin volverse impredecible, y el equipo puede explicar en todo momento por qué se comporta como lo hace.</p>
+
+<h2>Ecos <em>actuales</em></h2>
+<p>La ultraestabilidad sigue apareciendo en trabajos recientes. Existen librerías de código abierto que aplican el vocabulario de Ashby, como variables esenciales e intervenciones, para vigilar agentes de IA, y artículos académicos que proponen controladores homeostáticos deterministas alrededor de modelos de lenguaje.</p>
+
+<h2>Lo que nos <em>llevamos</em></h2>
+<p>El homeostato recuerda que la adaptación empieza por una lista corta: lo que el sistema no puede perder. Antes de pedirle inteligencia a una máquina, hay que decirle con precisión cuándo está mal. Esa claridad vale más que cualquier sofisticación en la forma de reaccionar.</p>
+<p>También enseña humildad en el diseño. Ashby no intentó prever todos los escenarios: construyó un mecanismo para salir de los que no había previsto. En productos digitales, donde los usuarios y los mercados cambian sin avisar, diseñar el cambio de reglas es tan importante como diseñar las reglas.</p>
+
+<div class="faq">
+<h2>Preguntas frecuentes</h2>
+<h3>¿Qué es la ultraestabilidad según W. Ross Ashby?</h3>
+<p>La ultraestabilidad, según W. Ross Ashby, es la capacidad de un sistema de cambiar sus propias reglas de funcionamiento cuando una variable esencial sale de sus límites. La ultraestabilidad combina un ajuste rápido y continuo con un segundo nivel lento que prueba nuevas configuraciones hasta recuperar el equilibrio.</p>
+<h3>¿Dónde se puede leer Design for a Brain de Ashby?</h3>
+<p>Design for a Brain de W. Ross Ashby se publicó en 1952 y la reimpresión corregida de 1954 está disponible en Internet Archive. La segunda edición revisada de Design for a Brain apareció en 1960 y se encuentra en la Biodiversity Heritage Library.</p>
+<h3>¿Qué relación tiene el homeostato con la inteligencia artificial?</h3>
+<p>El homeostato de Ashby fue una de las primeras máquinas en mostrar conducta adaptativa sin programar cada respuesta, una pregunta central de la inteligencia artificial. Hoy el homeostato inspira diseños que vigilan variables vitales de agentes de IA y ajustan su configuración cuando salen de rango.</p>
+</div>
+
+<h2>Para leer <em>más</em></h2>
+<p><b>Walter B. Cannon, <i>The Wisdom of the Body</i> (1932).</b> El fisiólogo que popularizó el término homeostasis.</p>
+<p><b>Andrew Pickering, <i>The Cybernetic Brain: Sketches of Another Future</i> (2010).</b> Historia de la cibernética británica con un capítulo dedicado a Ashby.</p>
+
+<h2>Fuentes</h2>
+<p><a href="https://archive.org/details/designforbrain00ashb">Design for a Brain, W. Ross Ashby, Chapman &amp; Hall / Wiley (1952; reimpr. 1954)</a></p>
+<p><a href="https://britishlibrary.typepad.co.uk/science/2016/04/the-thinking-machine.html">The Thinking Machine: W. Ross Ashby and the Homeostat, British Library (2016)</a></p>
+<p><a href="https://ashby.info/bibliography.html">Bibliografía de W. Ross Ashby, The W. Ross Ashby Digital Archive (2008)</a></p>
+<p><a href="https://archives.library.illinois.edu/?p=14051">W. Ross Ashby, University of Illinois Archives</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Homeostat">Homeostat, Wikipedia</a></p>
+</div></section>
+<footer><div class="w">Want it. Analyze it. Build it<b>.</b> · Wantalyze Lab Notes · Serie Biblioteca Vintage 013</div></footer>
+</body>
+</html>
