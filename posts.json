@@ -1,5 +1,13 @@
 [
   {
+    "numero": "014",
+    "titulo": "La máquina de versos",
+    "slug": "la-maquina-de-versos",
+    "ruta": "posts/014-la-maquina-de-versos/",
+    "miniatura": "posts/014-la-maquina-de-versos/miniatura.png",
+    "fecha": "2026-11-22"
+  },
+  {
     "numero": "013",
     "titulo": "Equivocarse hasta el equilibrio",
     "slug": "equivocarse-hasta-el-equilibrio",
