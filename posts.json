@@ -1,5 +1,13 @@
 [
   {
+    "numero": "015",
+    "titulo": "El fichero virtual",
+    "slug": "el-fichero-virtual",
+    "ruta": "posts/015-el-fichero-virtual/",
+    "miniatura": "posts/015-el-fichero-virtual/miniatura.png",
+    "fecha": "2026-11-23"
+  },
+  {
     "numero": "014",
     "titulo": "La máquina de versos",
     "slug": "la-maquina-de-versos",
