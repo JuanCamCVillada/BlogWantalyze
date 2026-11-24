@@ -1,5 +1,13 @@
 [
   {
+    "numero": "016",
+    "titulo": "El transformador de Viena",
+    "slug": "el-transformador-de-viena",
+    "ruta": "posts/016-el-transformador-de-viena/",
+    "miniatura": "posts/016-el-transformador-de-viena/miniatura.png",
+    "fecha": "2026-11-24"
+  },
+  {
     "numero": "015",
     "titulo": "El fichero virtual",
     "slug": "el-fichero-virtual",
