@@ -1,5 +1,13 @@
 [
   {
+    "numero": "017",
+    "titulo": "Orden desde el ruido",
+    "slug": "orden-desde-el-ruido",
+    "ruta": "posts/017-orden-desde-el-ruido/",
+    "miniatura": "posts/017-orden-desde-el-ruido/miniatura.png",
+    "fecha": "2026-11-25"
+  },
+  {
     "numero": "016",
     "titulo": "El transformador de Viena",
     "slug": "el-transformador-de-viena",
