@@ -1,5 +1,13 @@
 [
   {
+    "numero": "018",
+    "titulo": "Lo que debe ser cierto",
+    "slug": "lo-que-debe-ser-cierto",
+    "ruta": "posts/018-lo-que-debe-ser-cierto/",
+    "miniatura": "posts/018-lo-que-debe-ser-cierto/miniatura.png",
+    "fecha": "2026-11-26"
+  },
+  {
     "numero": "017",
     "titulo": "Orden desde el ruido",
     "slug": "orden-desde-el-ruido",
