@@ -1,5 +1,13 @@
 [
   {
+    "numero": "020",
+    "titulo": "La hoja de aserción",
+    "slug": "la-hoja-de-asercion",
+    "ruta": "posts/020-la-hoja-de-asercion/",
+    "miniatura": "posts/020-la-hoja-de-asercion/miniatura.png",
+    "fecha": "2026-11-28"
+  },
+  {
     "numero": "019",
     "titulo": "Tarjetas que caen",
     "slug": "tarjetas-que-caen",
